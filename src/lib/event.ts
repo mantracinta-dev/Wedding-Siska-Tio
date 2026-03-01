@@ -17,8 +17,7 @@ export const EVENT_DETAILS = {
   },
 };
 
-export const MAP_URL =
-  "https://maps.google.com/?q=Plataran+Hutan+Kota+GBK&ftid=0x2e69f15f9b2a54a1";
+export const MAP_URL = "https://maps.app.goo.gl/NEVRLcGoEZNhhaY5A";
 
 export const AUDIO_TRACK = {
   title: "Blooming Lights",

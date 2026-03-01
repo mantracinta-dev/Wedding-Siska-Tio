@@ -8,17 +8,17 @@ export type GiftAccount = {
 
 export const GIFT_ACCOUNTS: GiftAccount[] = [
   {
-    id: "siska-bca",
+    id: "siska-bsi",
     owner: "siska",
-    bank: "BCA",
-    accountNumber: "1234567890",
+    bank: "BSI",
+    accountNumber: "7187625607",
     accountName: "Siska Mulyaningsih",
   },
   {
-    id: "tio-mandiri",
-    owner: "tio",
-    bank: "Mandiri",
-    accountNumber: "9876543210",
-    accountName: "Tio Abadi",
+    id: "siska-dana",
+    owner: "siska",
+    bank: "Dana",
+    accountNumber: "089531718711",
+    accountName: "Siska Mulyaningsih",
   },
 ];

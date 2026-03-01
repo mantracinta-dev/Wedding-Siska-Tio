@@ -38,8 +38,8 @@ export default function DigitalEnvelopeGift() {
             Amplop Digital
           </p>
           <h2 className="mt-3 font-display text-3xl text-ink-900">
-            Hadiah berupa doa adalah yang utama, namun jika ingin berbagi
-            tanda kasih kami siapkan rekening berikut.
+            Hadiah berupa doa adalah yang utama, namun jika memberi adalah
+            ungkapan tanda kasih Anda, Anda dapat memberi kado secara cashless.
           </h2>
         </div>
         <div className="grid gap-4 sm:grid-cols-2">
@@ -52,7 +52,7 @@ export default function DigitalEnvelopeGift() {
                 {account.owner === "siska" ? "Rekening Siska" : "Rekening Tio"}
               </p>
               <p className="mt-3 text-sm font-semibold text-ink-700">
-                Bank {account.bank}
+                {account.bank === "Dana" ? "E-wallet" : "Bank"} {account.bank}
               </p>
               <p className="mt-1 text-2xl font-semibold text-ink-900">
                 {account.accountNumber}
