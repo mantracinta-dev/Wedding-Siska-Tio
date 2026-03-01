@@ -48,6 +48,7 @@ export default function InvitationExperience({
     toggleMusic,
     openLightbox,
     closeLightbox,
+    scrollToHero,
   } = useInvitationViewModel(guest);
   const letterRef = useRef<HTMLDivElement | null>(null);
   const originalOverflow = useRef<string | null>(null);
@@ -244,7 +245,7 @@ export default function InvitationExperience({
               <div className="flex flex-wrap items-center justify-center gap-3">
                 <button
                   type="button"
-                  onClick={handleOpen}
+                  onClick={isOpened ? scrollToHero : handleOpen}
                   className="cursor-pointer rounded-full bg-ink-900 px-6 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-white transition hover:-translate-y-0.5 hover:shadow"
                 >
                   {isOpened ? (
@@ -335,7 +336,7 @@ export default function InvitationExperience({
         </section>
 
         {isOpened && (
-          <div className="space-y-16" data-scroll-container>
+          <div className="space-y-16" data-scroll-container id="hero-section">
             <section data-scroll-section>
               <div className="grid gap-6 md:grid-cols-[1.4fr_1fr]">
                 <div>

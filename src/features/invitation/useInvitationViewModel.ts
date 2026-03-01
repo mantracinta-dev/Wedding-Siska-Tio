@@ -58,6 +58,12 @@ export function useInvitationViewModel(guest: GuestProfile) {
     playAudio();
   };
 
+  const scrollToHero = () => {
+    document
+      .getElementById("hero-section")
+      ?.scrollIntoView({ behavior: "smooth" });
+  };
+
   const toggleMusic = () => {
     if (!hasInteracted) {
       handleOpen();
@@ -104,5 +110,6 @@ export function useInvitationViewModel(guest: GuestProfile) {
     toggleMusic,
     openLightbox,
     closeLightbox,
+    scrollToHero,
   };
 }
