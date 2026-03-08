@@ -8,7 +8,7 @@ const slides = [
   ...GALLERY_PHOTOS.filter((photo) => photo.orientation === "portrait").map(
     (photo) => photo.src,
   ),
-].slice(0, 3); // take top 3
+]; // showing all portrait galllery photos
 
 export default function HeroSlideshow() {
   const [currentIndex, setCurrentIndex] = useState(0);

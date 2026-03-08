@@ -394,7 +394,9 @@ export default function InvitationExperience({
                       <p className="mt-4 text-xl font-semibold text-ink-900">
                         {event.dateLabel}
                       </p>
-                      <p className="mt-2 text-sm text-ink-500">{event.time}</p>
+                      <p className="mt-2 text-sm text-ink-500 mb-10">
+                        {event.time}
+                      </p>
                       <p className="mt-4 text-sm font-semibold text-ink-700">
                         {event.location}
                       </p>
@@ -408,7 +410,7 @@ export default function InvitationExperience({
                   href={MAP_URL}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex w-fit items-center gap-2 rounded-full border border-sand-200 bg-white px-5 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-ink-700 transition hover:-translate-y-0.5 hover:shadow"
+                  className="inline-flex w-fit items-center gap-2 rounded-full border border-sand-200 bg-white px-5 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-ink-700 transition hover:-translate-y-0.5 hover:bg-red-400 hover:text-white hover:shadow"
                 >
                   <MapPin className="h-4 w-4" />
                   Buka Google Maps
