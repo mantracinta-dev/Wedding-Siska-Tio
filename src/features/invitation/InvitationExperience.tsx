@@ -10,6 +10,7 @@ import CountdownTicker from "@/features/invitation/CountdownTicker";
 import CoupleProfiles from "@/features/invitation/CoupleProfiles";
 import DigitalEnvelopeGift from "@/features/invitation/DigitalEnvelopeGift";
 import GalleryGrid from "@/features/invitation/GalleryGrid";
+import HeroSlideshow from "@/features/invitation/HeroSlideshow";
 import { useInvitationViewModel } from "@/features/invitation/useInvitationViewModel";
 import { AUDIO_TRACK, EVENT_DETAILS, MAP_URL } from "@/lib/event";
 import type { GuestProfile } from "@/lib/guests";
@@ -238,9 +239,17 @@ export default function InvitationExperience({
                 </p>
               </div>
               <p className="max-w-xl text-sm leading-7 text-ink-500">
-                {isOpened
-                  ? "Kami mengundangmu untuk hadir dalam momen paling hangat dalam hidup kami. Sentuhanmu di hari istimewa akan melengkapi cerita cinta ini. Scroll down untuk melihat detail acara"
-                  : "Kami mengundangmu untuk menjadi bagian dari hari bahagia kami. Klik untuk membuka amplop dan temukan detail lengkap acara."}
+                {isOpened ? (
+                  <>
+                    Kami mengundangmu untuk hadir dalam momen paling hangat
+                    dalam hidup kami. Sentuhanmu di hari istimewa akan
+                    melengkapi cerita cinta ini.
+                    <br />
+                    Scroll down untuk melihat detail acara
+                  </>
+                ) : (
+                  "Kami mengundangmu untuk menjadi bagian dari hari bahagia kami. Klik untuk membuka amplop dan temukan detail lengkap acara."
+                )}
               </p>
               <div className="flex flex-wrap items-center justify-center gap-3">
                 <button
@@ -324,7 +333,7 @@ export default function InvitationExperience({
                     </p>
                   </div>
                   <p className="mt-4 text-2xl font-semibold text-ink-900">
-                    Sabtu, 18 Juli 2026
+                    {EVENT_DETAILS.ceremony.dateLabel}
                   </p>
                   <p className="mt-2 text-sm text-ink-500">
                     Pandeglang — Satu hari penuh kebahagiaan
@@ -338,25 +347,25 @@ export default function InvitationExperience({
         {isOpened && (
           <div className="space-y-16" data-scroll-container id="hero-section">
             <section data-scroll-section>
-              <div className="grid gap-6 md:grid-cols-[1.4fr_1fr]">
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.35em] text-sand-700">
-                    Hero
-                  </p>
-                  <h2 className="mt-4 font-display text-4xl text-ink-900">
-                    Merayakan perjalanan cinta yang hangat dan penuh doa
-                  </h2>
-                  <p className="mt-4 text-sm leading-7 text-ink-500">
-                    Dengan penuh rasa syukur, kami mengundangmu untuk merayakan
-                    hari istimewa kami. Hadirnya kamu menjadi bagian dari
-                    kenangan terindah dalam hidup kami.
-                  </p>
-                </div>
-                <div className="rounded-3xl border border-sand-200 bg-white/70 p-6 shadow-card">
-                  <p className="text-xs font-semibold uppercase tracking-[0.3em] text-sand-700">
-                    Countdown
-                  </p>
-                  <CountdownTicker countdown={countdown} />
+              <div className="grid gap-6 md:grid-cols-2 items-center">
+                <HeroSlideshow />
+                <div className="flex flex-col gap-6">
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-[0.35em] text-sand-700">
+                      Countdown
+                    </p>
+                    <h2 className="mt-4 font-display text-4xl text-ink-900">
+                      Merayakan perjalanan cinta yang hangat dan penuh doa
+                    </h2>
+                    <p className="mt-4 text-sm leading-7 text-ink-500">
+                      Dengan penuh rasa syukur, kami mengundangmu untuk
+                      merayakan hari istimewa kami. Hadirnya kamu menjadi bagian
+                      dari kenangan terindah dalam hidup kami.
+                    </p>
+                  </div>
+                  <div className="rounded-3xl border border-sand-200 bg-white/70 p-6 shadow-card">
+                    <CountdownTicker countdown={countdown} />
+                  </div>
                 </div>
               </div>
             </section>
@@ -377,7 +386,7 @@ export default function InvitationExperience({
                   {Object.values(EVENT_DETAILS).map((event) => (
                     <div
                       key={event.title}
-                      className="rounded-3xl border border-sand-200 bg-white/80 p-6 shadow-card"
+                      className="rounded-3xl border border-sand-200 bg-white/80 p-10 shadow-card"
                     >
                       <p className="text-xs font-semibold uppercase tracking-[0.3em] text-sand-700">
                         {event.title}
