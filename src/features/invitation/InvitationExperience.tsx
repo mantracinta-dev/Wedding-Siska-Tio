@@ -352,7 +352,7 @@ export default function InvitationExperience({
                 <div className="flex flex-col gap-6">
                   <div>
                     <p className="text-xs font-semibold uppercase tracking-[0.35em] text-sand-700">
-                      Countdown
+                      Assalamu'alaikum Warahmatullahi Wabarakatuh.
                     </p>
                     <h2 className="mt-4 font-display text-4xl text-ink-900">
                       Merayakan perjalanan cinta yang hangat dan penuh doa
@@ -364,6 +364,9 @@ export default function InvitationExperience({
                     </p>
                   </div>
                   <div className="rounded-3xl border border-sand-200 bg-white/70 p-6 shadow-card">
+                    <p className="text-2xl text-center font-semibold text-ink-900">
+                      {EVENT_DETAILS.ceremony.dateLabel}
+                    </p>
                     <CountdownTicker countdown={countdown} />
                   </div>
                 </div>
@@ -427,6 +430,14 @@ export default function InvitationExperience({
                   <h2 className="mt-3 font-display text-3xl text-ink-900">
                     Momen-momen yang memeluk kisah kami
                   </h2>
+                  <p className="mt-4 text-sm leading-7 text-ink-500">
+                    "Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia
+                    menciptakan pasangan-pasangan untukmu dari jenismu sendiri,
+                    agar kamu cenderung dan merasa tenteram kepadanya, dan Dia
+                    menjadikan di antaramu rasa kasih dan sayang. Sungguh, pada
+                    yang demikian itu benar-benar terdapat tanda-tanda
+                    (kebesaran Allah) bagi kaum yang berpikir. ~ Ar Ruum;21"
+                  </p>
                 </div>
                 <GalleryGrid onOpen={openLightbox} />
               </div>
@@ -450,8 +461,10 @@ export default function InvitationExperience({
                   Kehadiranmu adalah doa terindah
                 </h2>
                 <p className="mt-4 text-sm leading-7 text-ink-500">
-                  Dengan penuh cinta, kami berharap dapat merayakan momen ini
-                  bersama kamu. Sampai jumpa di hari bahagia kami.
+                  "Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila
+                  Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan do'a restu
+                  kepada kedua mempelai. "<br />
+                  Wassalamu'alaikum Warahmatullahi Wabarakatuh.
                 </p>
               </div>
             </section>

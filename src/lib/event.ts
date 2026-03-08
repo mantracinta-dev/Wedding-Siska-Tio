@@ -9,7 +9,7 @@ export const EVENT_DETAILS = {
     address: "Jl. Sisingamangaraja No.1, Kebayoran Baru",
   },
   reception: {
-    title: "Resepsi & Garden Soirée",
+    title: "Resepsi",
     dateLabel: "Sabtu, 02 Mei 2026",
     time: "19.00 WIB",
     location: "Plataran Hutan Kota, GBK",

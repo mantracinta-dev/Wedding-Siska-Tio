@@ -28,7 +28,10 @@ const readStoredEntry = (slug: string): GuestbookEntry | null => {
 const persistEntry = (entry: GuestbookEntry) => {
   if (typeof window === "undefined") return;
   try {
-    window.localStorage.setItem(storageKey(entry.guestSlug), JSON.stringify(entry));
+    window.localStorage.setItem(
+      storageKey(entry.guestSlug),
+      JSON.stringify(entry),
+    );
   } catch {
     // ignore localStorage failure
   }
@@ -51,12 +54,17 @@ type ViewModelProps = {
   guestName: string;
 };
 
-export function useGuestbookViewModel({ guestSlug, guestName }: ViewModelProps) {
+export function useGuestbookViewModel({
+  guestSlug,
+  guestName,
+}: ViewModelProps) {
   const [entry, setEntry] = useState<GuestbookEntry | null>(null);
   const [name, setName] = useState(guestName);
   const [message, setMessage] = useState("");
   const [isEditing, setIsEditing] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [isLoadingFeed, setIsLoadingFeed] = useState(true);
   const [messages, setMessages] = useState<GuestbookEntry[]>([]);
 
   useEffect(() => {
@@ -72,7 +80,9 @@ export function useGuestbookViewModel({ guestSlug, guestName }: ViewModelProps) 
 
   const updateFeedWith = useCallback((record: GuestbookEntry) => {
     setMessages((prev) => {
-      const filtered = prev.filter((item) => item.guestSlug !== record.guestSlug);
+      const filtered = prev.filter(
+        (item) => item.guestSlug !== record.guestSlug,
+      );
       return [record, ...filtered];
     });
   }, []);
@@ -86,6 +96,8 @@ export function useGuestbookViewModel({ guestSlug, guestName }: ViewModelProps) 
       }
     } catch {
       // ignore feed failure
+    } finally {
+      setIsLoadingFeed(false);
     }
   }, []);
 
@@ -136,7 +148,9 @@ export function useGuestbookViewModel({ guestSlug, guestName }: ViewModelProps) 
     let cancelled = false;
     const fetchServerEntry = async () => {
       try {
-        const response = await fetch(`/api/message?guestSlug=${encodeURIComponent(guestSlug)}`);
+        const response = await fetch(
+          `/api/message?guestSlug=${encodeURIComponent(guestSlug)}`,
+        );
         const payload = await response.json().catch(() => null);
         if (!cancelled && payload?.data) {
           const remote: GuestbookEntry = {
@@ -162,9 +176,16 @@ export function useGuestbookViewModel({ guestSlug, guestName }: ViewModelProps) 
     };
   }, [applyEntry, flushQueue, guestSlug, loadFeed]);
 
-  const remaining = useMemo(() => MAX_MESSAGE_LENGTH - message.length, [message]);
+  const remaining = useMemo(
+    () => MAX_MESSAGE_LENGTH - message.length,
+    [message],
+  );
 
-  const startEditing = () => setIsEditing(true);
+  const startEditing = () => {
+    setSubmitError(null);
+    setIsEditing(true);
+  };
+
   useEffect(() => {
     if (!isEditing || !entry) return;
     setName(entry.name);
@@ -183,6 +204,8 @@ export function useGuestbookViewModel({ guestSlug, guestName }: ViewModelProps) 
     if (trimmedName.length > MAX_NAME_LENGTH) return;
 
     setIsSubmitting(true);
+    setSubmitError(null);
+
     const payload: GuestbookEntry = {
       guestSlug,
       name: trimmedName,
@@ -202,16 +225,24 @@ export function useGuestbookViewModel({ guestSlug, guestName }: ViewModelProps) 
       });
 
       const result = await response.json().catch(() => null);
-      const shouldQueue = !response.ok || !result?.success || result.persisted === false;
+      const shouldQueue =
+        !response.ok || !result?.success || result.persisted === false;
 
       if (shouldQueue) {
         queueEntry(payload);
+        // Show a soft warning — ucapan tersimpan lokal, akan dicoba kirim ulang
+        setSubmitError(
+          "Koneksi bermasalah. Ucapanmu tersimpan dan akan dikirim otomatis.",
+        );
       } else {
         await flushQueue();
         await loadFeed();
       }
     } catch {
       queueEntry(payload);
+      setSubmitError(
+        "Koneksi bermasalah. Ucapanmu tersimpan dan akan dikirim otomatis.",
+      );
     } finally {
       setIsSubmitting(false);
       setIsEditing(false);
@@ -222,6 +253,8 @@ export function useGuestbookViewModel({ guestSlug, guestName }: ViewModelProps) 
     entry,
     isEditing,
     isSubmitting,
+    submitError,
+    isLoadingFeed,
     name,
     message,
     remaining,
