@@ -3,7 +3,7 @@ export const COUPLE = {
     fullName: "apt. Siska Mulyaningsih.S.Farm",
     nickname: "Siska",
     parents: "Putri dari Bapak Musahar & Ibu Yarlis",
-    photo: "/couple/siska.png",
+    photo: "/couple/siska.webp",
     intro:
       "Siska percaya bahwa cinta tumbuh dari doa yang dijaga dan keluarga yang selalu merangkul.",
   },
@@ -11,7 +11,7 @@ export const COUPLE = {
     fullName: "apt. Setio Buana.S.Farm",
     nickname: "Tio",
     parents: "Putra dari Bapak Afrijoni & Ibu Ratmawati",
-    photo: "/couple/tio.png",
+    photo: "/couple/tio.webp",
     intro:
       "Tio menemukan makna perjalanan hidupnya saat bertemu Siska, sahabat sekaligus cintanya.",
   },
