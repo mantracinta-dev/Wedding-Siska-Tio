@@ -1,11 +1,12 @@
 "use client";
 
 import { PenLine, Send, AlertCircle } from "lucide-react";
-
 import {
   GUESTBOOK_LIMITS,
   useGuestbookViewModel,
 } from "@/features/guestbook/useGuestbookViewModel";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
 
 type GuestbookProps = {
   guestSlug: string;
@@ -46,9 +47,21 @@ export default function Guestbook({ guestSlug, guestName }: GuestbookProps) {
   // Filter out own message from the "other guests" list
   const otherMessages = messages.filter((item) => item.guestSlug !== guestSlug);
 
+  const successRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (entry && !isEditing && successRef.current) {
+      gsap.fromTo(
+        successRef.current,
+        { opacity: 0, y: 15, scale: 0.95 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: "back.out(1.2)" },
+      );
+    }
+  }, [entry, isEditing]);
+
   return (
-    <div className="w-full rounded-3xl bg-white/70 p-6 shadow-card backdrop-blur">
-      <div className="flex flex-col gap-2">
+    <div className="w-full rounded-3xl bg-white/70 py-6 overflow-hidden shadow-card backdrop-blur">
+      <div className="flex flex-col gap-2 px-6">
         <p className="text-sm font-semibold uppercase tracking-[0.25em] text-sand-700">
           Guestbook
         </p>
@@ -61,7 +74,10 @@ export default function Guestbook({ guestSlug, guestName }: GuestbookProps) {
       </div>
 
       {entry && !isEditing ? (
-        <div className="mt-6 rounded-2xl border border-sand-200 bg-sand-50 p-5">
+        <div
+          ref={successRef}
+          className="mt-6 mx-6 rounded-2xl border border-sand-200 bg-sand-50 p-5 shadow-sm"
+        >
           <div className="flex items-start justify-between gap-4">
             <div>
               <p className="text-lg font-semibold text-ink-900">{entry.name}</p>
@@ -89,7 +105,7 @@ export default function Guestbook({ guestSlug, guestName }: GuestbookProps) {
           </div>
         </div>
       ) : (
-        <form onSubmit={handleSubmit} className="mt-6 flex flex-col gap-4">
+        <form onSubmit={handleSubmit} className="mt-6 flex flex-col gap-4 px-6">
           <div className="grid gap-3">
             <label className="text-sm font-semibold text-ink-700">Nama</label>
             <input
@@ -135,43 +151,76 @@ export default function Guestbook({ guestSlug, guestName }: GuestbookProps) {
         </form>
       )}
 
-      <div className="mt-8 space-y-4">
-        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-sand-700">
+      <div className="mt-12 w-full overflow-hidden">
+        <p className="mb-6 px-6 text-xs font-semibold uppercase tracking-[0.3em] text-sand-700">
           Ucapan Tamu Lain
         </p>
+
         {isLoadingFeed ? (
-          <div className="space-y-4">
-            <MessageSkeleton />
-            <MessageSkeleton />
-            <MessageSkeleton />
+          <div className="flex gap-4 px-6 overflow-hidden">
+            <div className="w-[300px] shrink-0">
+              <MessageSkeleton />
+            </div>
+            <div className="w-[300px] shrink-0">
+              <MessageSkeleton />
+            </div>
+            <div className="w-[300px] shrink-0">
+              <MessageSkeleton />
+            </div>
           </div>
         ) : otherMessages.length > 0 ? (
-          <div className="space-y-4">
-            {otherMessages.map((item) => (
-              <div
-                key={item.guestSlug}
-                className="rounded-3xl border border-sand-200 bg-white/80 p-5 shadow-sm"
-              >
-                <p className="text-sm font-semibold text-ink-900">
-                  {item.name}
-                </p>
-                <p className="mt-2 text-sm leading-6 text-ink-500">
-                  {item.message}
-                </p>
-                {item.updatedAt && (
-                  <p className="mt-3 text-[11px] uppercase tracking-[0.2em] text-sand-700">
-                    {new Date(item.updatedAt).toLocaleString("id-ID", {
-                      dateStyle: "medium",
-                      timeStyle: "short",
-                    })}
+          <div className="relative flex w-full overflow-hidden">
+            {/* Animasi berjalan 2 kelompok identik (duplikasi) supaya seamlessly looping */}
+            <div className="flex w-max min-w-full shrink-0 animate-marquee items-start gap-4 px-4 hover:pause-animation">
+              {/* Grup A (Original) */}
+              {otherMessages.map((item) => (
+                <div
+                  key={`a-${item.guestSlug}`}
+                  className="w-[320px] shrink-0 rounded-3xl border border-sand-200 bg-white p-6 shadow-sm whitespace-normal transition hover:-translate-y-1 hover:shadow-md"
+                >
+                  <p className="text-base font-semibold text-ink-900 font-display">
+                    {item.name}
                   </p>
-                )}
-              </div>
-            ))}
+                  <p className="mt-3 text-sm leading-6 text-ink-500 line-clamp-5">
+                    "{item.message}"
+                  </p>
+                  {item.updatedAt && (
+                    <p className="mt-4 text-[10px] font-semibold uppercase tracking-[0.2em] text-sand-500">
+                      {new Date(item.updatedAt).toLocaleString("id-ID", {
+                        dateStyle: "medium",
+                      })}
+                    </p>
+                  )}
+                </div>
+              ))}
+
+              {/* Grup B (Clone, menyatu dalam 1 kontainer berjalan) */}
+              {otherMessages.map((item) => (
+                <div
+                  key={`b-${item.guestSlug}`}
+                  className="w-[320px] shrink-0 rounded-3xl border border-sand-200 bg-white p-6 shadow-sm whitespace-normal transition hover:-translate-y-1 hover:shadow-md"
+                  aria-hidden="true"
+                >
+                  <p className="text-base font-semibold text-ink-900 font-display">
+                    {item.name}
+                  </p>
+                  <p className="mt-3 text-sm leading-6 text-ink-500 line-clamp-5">
+                    "{item.message}"
+                  </p>
+                  {item.updatedAt && (
+                    <p className="mt-4 text-[10px] font-semibold uppercase tracking-[0.2em] text-sand-500">
+                      {new Date(item.updatedAt).toLocaleString("id-ID", {
+                        dateStyle: "medium",
+                      })}
+                    </p>
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
         ) : (
-          <p className="text-sm text-ink-400">
-            Belum ada ucapan dari tamu lain.
+          <p className="px-6 text-sm text-ink-400">
+            Belum ada ucapan dari tamu lain. Jadilah yang pertama!
           </p>
         )}
       </div>

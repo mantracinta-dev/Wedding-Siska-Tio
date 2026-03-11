@@ -20,6 +20,17 @@
   --background-image-fiber:
     radial-gradient(circle at top, rgba(255, 255, 255, 0.5), transparent 70%),
     linear-gradient(135deg, #fff6ec 0%, #f8ede3 100%);
+    
+  --animate-marquee: marquee 90s linear infinite;
+  
+  @keyframes marquee {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
 }
 
 :root {
@@ -58,6 +69,12 @@
   ::selection {
     background: #e1ad6f;
     color: #1b1a1f;
+  }
+}
+
+@layer utilities {
+  .pause-animation {
+    animation-play-state: paused;
   }
 }
 
