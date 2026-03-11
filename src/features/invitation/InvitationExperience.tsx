@@ -22,7 +22,7 @@ import {
   X,
   ChevronsDown,
 } from "lucide-react";
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import InteractiveButterfly from "@/features/invitation/InteractiveButterfly";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -206,24 +206,18 @@ export default function InvitationExperience({
               className="flex flex-col items-center gap-6 text-center"
               data-opening
             >
-              <div className="w-20 h-20 absolute top-0 right-0 -rotate-45">
-                <DotLottieReact
-                  src="/lottie/Butterfly.lottie"
-                  loop
-                  autoplay
-                  width="120px"
-                  height="120px"
-                />
-              </div>
-              <div className="w-20 h-20 absolute top-0 left-0 rotate-45">
-                <DotLottieReact
-                  src="/lottie/Butterfly.lottie"
-                  loop
-                  autoplay
-                  width="120px"
-                  height="120px"
-                />
-              </div>
+              <InteractiveButterfly
+                className="w-20 h-20 top-0 right-0"
+                baseRotate={-45}
+                isOpened={isOpened}
+                delay={0.15}
+              />
+              <InteractiveButterfly
+                className="w-20 h-20 top-0 left-0"
+                baseRotate={45}
+                isOpened={isOpened}
+                delay={0.3}
+              />
               <p className="text-xs font-semibold uppercase tracking-[0.4em] text-sand-700">
                 Undangan Pernikahan
               </p>
