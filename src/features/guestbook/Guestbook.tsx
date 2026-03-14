@@ -48,6 +48,13 @@ export default function Guestbook({ guestSlug, guestName }: GuestbookProps) {
   const otherMessages = messages.filter((item) => item.guestSlug !== guestSlug);
 
   const successRef = useRef<HTMLDivElement>(null);
+  const marqueeRef = useRef<HTMLDivElement>(null);
+  const firstItemRef = useRef<HTMLDivElement>(null);
+  const midItemRef = useRef<HTMLDivElement>(null);
+  const isDragging = useRef(false);
+  const isHovered = useRef(false);
+  const startX = useRef(0);
+  const scrollLeft = useRef(0);
 
   useEffect(() => {
     if (entry && !isEditing && successRef.current) {
@@ -58,6 +65,91 @@ export default function Guestbook({ guestSlug, guestName }: GuestbookProps) {
       );
     }
   }, [entry, isEditing]);
+
+  useEffect(() => {
+    let animationFrameId: number;
+    let lastTime = performance.now();
+    const speed = 40; // Kecepatan gerak lambat
+
+    const autoScroll = (time: number) => {
+      const iter = time - lastTime;
+      lastTime = time;
+
+      if (
+        !isDragging.current &&
+        !isHovered.current &&
+        marqueeRef.current &&
+        firstItemRef.current &&
+        midItemRef.current
+      ) {
+        marqueeRef.current.scrollLeft += (speed * iter) / 1000;
+
+        const loopWidth =
+          midItemRef.current.offsetLeft - firstItemRef.current.offsetLeft;
+
+        // Reset scroll menyambung loop
+        if (marqueeRef.current.scrollLeft >= loopWidth) {
+          marqueeRef.current.scrollLeft -= loopWidth;
+        }
+      }
+      animationFrameId = requestAnimationFrame(autoScroll);
+    };
+
+    animationFrameId = requestAnimationFrame(autoScroll);
+    return () => cancelAnimationFrame(animationFrameId);
+  }, [otherMessages.length]);
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    isDragging.current = true;
+    if (marqueeRef.current) {
+      startX.current = e.pageX - marqueeRef.current.offsetLeft;
+      scrollLeft.current = marqueeRef.current.scrollLeft;
+      marqueeRef.current.style.cursor = "grabbing";
+      marqueeRef.current.style.userSelect = "none";
+    }
+  };
+
+  const handleMouseLeave = () => {
+    isDragging.current = false;
+    isHovered.current = false;
+    if (marqueeRef.current) {
+      marqueeRef.current.style.cursor = "grab";
+      marqueeRef.current.style.userSelect = "auto";
+    }
+  };
+
+  const handleMouseUp = () => {
+    isDragging.current = false;
+    if (marqueeRef.current) {
+      marqueeRef.current.style.cursor = "grab";
+      marqueeRef.current.style.userSelect = "auto";
+    }
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (
+      !isDragging.current ||
+      !marqueeRef.current ||
+      !firstItemRef.current ||
+      !midItemRef.current
+    )
+      return;
+    e.preventDefault();
+    const x = e.pageX - marqueeRef.current.offsetLeft;
+    const walk = (x - startX.current) * 1.5;
+    marqueeRef.current.scrollLeft = scrollLeft.current - walk;
+
+    const loopWidth =
+      midItemRef.current.offsetLeft - firstItemRef.current.offsetLeft;
+
+    if (marqueeRef.current.scrollLeft <= 0) {
+      marqueeRef.current.scrollLeft += loopWidth;
+      scrollLeft.current += loopWidth;
+    } else if (marqueeRef.current.scrollLeft >= loopWidth) {
+      marqueeRef.current.scrollLeft -= loopWidth;
+      scrollLeft.current -= loopWidth;
+    }
+  };
 
   return (
     <div className="w-full rounded-3xl bg-white/70 py-6 overflow-hidden shadow-card backdrop-blur">
@@ -170,52 +262,75 @@ export default function Guestbook({ guestSlug, guestName }: GuestbookProps) {
           </div>
         ) : otherMessages.length > 0 ? (
           <div className="relative flex w-full overflow-hidden">
-            {/* Animasi berjalan 2 kelompok identik (duplikasi) supaya seamlessly looping */}
-            <div className="flex w-max min-w-full shrink-0 animate-marquee items-start gap-4 px-4 hover:pause-animation">
-              {/* Grup A (Original) */}
-              {otherMessages.map((item) => (
-                <div
-                  key={`a-${item.guestSlug}`}
-                  className="w-[320px] shrink-0 rounded-3xl border border-sand-200 bg-white p-6 shadow-sm whitespace-normal transition hover:-translate-y-1 hover:shadow-md"
-                >
-                  <p className="text-base font-semibold text-ink-900 font-display">
-                    {item.name}
-                  </p>
-                  <p className="mt-3 text-sm leading-6 text-ink-500 line-clamp-5">
-                    "{item.message}"
-                  </p>
-                  {item.updatedAt && (
-                    <p className="mt-4 text-[10px] font-semibold uppercase tracking-[0.2em] text-sand-500">
-                      {new Date(item.updatedAt).toLocaleString("id-ID", {
-                        dateStyle: "medium",
-                      })}
+            <div
+              ref={marqueeRef}
+              className="flex w-full overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] cursor-grab active:cursor-grabbing [scroll-behavior:auto] touch-pan-x"
+              onMouseEnter={() => {
+                isHovered.current = true;
+              }}
+              onMouseLeave={handleMouseLeave}
+              onMouseDown={handleMouseDown}
+              onMouseUp={handleMouseUp}
+              onMouseMove={handleMouseMove}
+              onTouchStart={() => {
+                isHovered.current = true;
+                isDragging.current = true;
+              }}
+              onTouchEnd={() => {
+                isHovered.current = false;
+                isDragging.current = false;
+              }}
+            >
+              <div className="flex w-max shrink-0 items-start gap-4 px-4 pb-4 pt-1">
+                {/* Grup A (Original) */}
+                {otherMessages.map((item, idx) => (
+                  <div
+                    key={`a-${item.guestSlug}`}
+                    ref={idx === 0 ? firstItemRef : undefined}
+                    className="w-[320px] shrink-0 rounded-3xl border border-sand-200 bg-white p-6 shadow-sm whitespace-normal transition hover:-translate-y-1 hover:shadow-md"
+                  >
+                    <p className="text-base font-semibold text-ink-900 font-display">
+                      {item.name}
                     </p>
-                  )}
-                </div>
-              ))}
+                    <p className="mt-3 text-sm leading-6 text-ink-500 line-clamp-5">
+                      "{item.message}"
+                    </p>
+                    {item.updatedAt && (
+                      <p className="mt-4 text-[10px] font-semibold uppercase tracking-[0.2em] text-sand-500">
+                        {new Date(item.updatedAt).toLocaleString("id-ID", {
+                          dateStyle: "medium",
+                          timeStyle: "short",
+                        })}
+                      </p>
+                    )}
+                  </div>
+                ))}
 
-              {/* Grup B (Clone, menyatu dalam 1 kontainer berjalan) */}
-              {otherMessages.map((item) => (
-                <div
-                  key={`b-${item.guestSlug}`}
-                  className="w-[320px] shrink-0 rounded-3xl border border-sand-200 bg-white p-6 shadow-sm whitespace-normal transition hover:-translate-y-1 hover:shadow-md"
-                  aria-hidden="true"
-                >
-                  <p className="text-base font-semibold text-ink-900 font-display">
-                    {item.name}
-                  </p>
-                  <p className="mt-3 text-sm leading-6 text-ink-500 line-clamp-5">
-                    "{item.message}"
-                  </p>
-                  {item.updatedAt && (
-                    <p className="mt-4 text-[10px] font-semibold uppercase tracking-[0.2em] text-sand-500">
-                      {new Date(item.updatedAt).toLocaleString("id-ID", {
-                        dateStyle: "medium",
-                      })}
+                {/* Grup B (Clone) */}
+                {otherMessages.map((item, idx) => (
+                  <div
+                    key={`b-${item.guestSlug}`}
+                    ref={idx === 0 ? midItemRef : undefined}
+                    className="w-[320px] shrink-0 rounded-3xl border border-sand-200 bg-white p-6 shadow-sm whitespace-normal transition hover:-translate-y-1 hover:shadow-md"
+                    aria-hidden="true"
+                  >
+                    <p className="text-base font-semibold text-ink-900 font-display">
+                      {item.name}
                     </p>
-                  )}
-                </div>
-              ))}
+                    <p className="mt-3 text-sm leading-6 text-ink-500 line-clamp-5">
+                      "{item.message}"
+                    </p>
+                    {item.updatedAt && (
+                      <p className="mt-4 text-[10px] font-semibold uppercase tracking-[0.2em] text-sand-500">
+                        {new Date(item.updatedAt).toLocaleString("id-ID", {
+                          dateStyle: "medium",
+                          timeStyle: "short",
+                        })}
+                      </p>
+                    )}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         ) : (

@@ -82,7 +82,7 @@ export default function InteractiveButterfly({
     <div
       ref={containerRef}
       className={`absolute z-10 pointer-events-none ${className}`}
-      style={{ padding: "10px", marginLeft: "-10px", marginTop: "-10px" }}
+      style={{ padding: "10px", marginTop: "-10px" }}
     >
       <div style={{ width: "120px", height: "120px" }}>
         <DotLottieReact

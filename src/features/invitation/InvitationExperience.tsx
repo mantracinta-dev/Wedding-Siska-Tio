@@ -207,7 +207,7 @@ export default function InvitationExperience({
               data-opening
             >
               <InteractiveButterfly
-                className="w-20 h-20 top-0 right-0"
+                className="w-20 h-20 top-0 bottom-0"
                 baseRotate={-45}
                 isOpened={isOpened}
                 delay={0.15}
@@ -277,44 +277,15 @@ export default function InvitationExperience({
 
             {!isOpened && (
               <div className="mt-10 grid gap-4 md:grid-cols-2">
-                <div className="relative">
-                  <button
-                    type="button"
-                    ref={envelopeRef}
-                    onClick={handleOpen}
-                    className="relative cursor-pointer flex aspect-[4/3] w-full items-center justify-center rounded-3xl border border-sand-200 bg-gradient-to-br from-sand-50 via-white to-sand-100 shadow-inner"
-                  >
-                    <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-sand-100 via-sand-50 to-white" />
-                    <div
-                      className="absolute left-6 right-6 top-6 h-1/2 rounded-t-[26px] bg-gradient-to-b from-sand-200 via-sand-100 to-sand-50"
-                      style={{ clipPath: "polygon(0 0, 100% 0, 50% 100%)" }}
-                    />
-                    <div className="absolute inset-6 rounded-[28px] border border-sand-200" />
-                    <div className="relative text-center">
-                      <p className="text-xs font-semibold uppercase tracking-[0.3em] text-sand-700">
-                        Amplop Tertutup
-                      </p>
-                      <p className="mt-2 text-sm text-ink-500">
-                        Tap untuk membuka undangan
-                      </p>
-                    </div>
-                  </button>
-                  <div
-                    ref={letterRef}
-                    className="pointer-events-none absolute inset-0 flex translate-y-8 flex-col rounded-[30px] border border-sand-100 bg-white/95 px-8 py-10 text-left opacity-0 shadow-card"
-                  >
-                    <p className="text-xs font-semibold uppercase tracking-[0.3em] text-sand-600">
-                      Dear
-                    </p>
-                    <p className="mt-2 text-2xl font-semibold text-ink-900">
-                      {resolvedGuest.name}
-                    </p>
-                    <p className="mt-6 text-sm leading-7 text-ink-500">
-                      Kami mengundangmu untuk hadir dalam momen paling hangat
-                      dalam hidup kami. Sentuhanmu di hari istimewa akan
-                      melengkapi cerita cinta ini.
-                    </p>
-                  </div>
+                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-sand-200 shadow-inner">
+                  <Image
+                    src="/couple/siska.webp"
+                    alt="Siska"
+                    fill
+                    className="object-cover"
+                    sizes="(min-width: 768px) 50vw, 100vw"
+                    priority
+                  />
                 </div>
                 <div
                   className="flex flex-col justify-center rounded-3xl border border-sand-200 bg-white/80 p-6"
