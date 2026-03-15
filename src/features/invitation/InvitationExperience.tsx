@@ -279,8 +279,8 @@ export default function InvitationExperience({
               <div className="mt-10 grid gap-4 md:grid-cols-2">
                 <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-sand-200 shadow-inner">
                   <Image
-                    src="/couple/siska.webp"
-                    alt="Siska"
+                    src="/other/forever.webp"
+                    alt="wedding"
                     fill
                     className="object-cover"
                     sizes="(min-width: 768px) 50vw, 100vw"
@@ -467,7 +467,7 @@ export default function InvitationExperience({
             </div>
             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6 text-white">
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-white/80">
-                {activePhoto.location}
+                {activePhoto.subcaption}
               </p>
               <p className="text-2xl font-semibold">{activePhoto.title}</p>
             </div>

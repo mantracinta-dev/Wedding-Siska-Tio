@@ -10,7 +10,10 @@ type GalleryGridProps = {
   onOpen: (index: number) => void;
 };
 
-function GalleryGridComponent({ photos = GALLERY_PHOTOS, onOpen }: GalleryGridProps) {
+function GalleryGridComponent({
+  photos = GALLERY_PHOTOS,
+  onOpen,
+}: GalleryGridProps) {
   const rendered = useMemo(() => photos.slice(0, 6), [photos]);
 
   return (
@@ -24,7 +27,9 @@ function GalleryGridComponent({ photos = GALLERY_PHOTOS, onOpen }: GalleryGridPr
         >
           <div
             className="relative w-full"
-            style={{ aspectRatio: photo.orientation === "portrait" ? "3 / 4" : "4 / 3" }}
+            style={{
+              aspectRatio: photo.orientation === "portrait" ? "3 / 4" : "4 / 3",
+            }}
           >
             <Image
               src={photo.src}
@@ -41,7 +46,7 @@ function GalleryGridComponent({ photos = GALLERY_PHOTOS, onOpen }: GalleryGridPr
               {String(index + 1).padStart(2, "0")}
             </p>
             <p className="text-base font-semibold">{photo.title}</p>
-            <p className="text-xs text-white/70">{photo.location}</p>
+            <p className="text-xs text-white/70">{photo.subcaption}</p>
           </div>
         </button>
       ))}
