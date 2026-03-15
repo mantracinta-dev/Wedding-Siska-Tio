@@ -378,7 +378,7 @@ export default function InvitationExperience({
                   href={MAP_URL}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex w-fit items-center gap-2 rounded-full border border-sand-200 bg-white px-5 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-ink-700 transition hover:-translate-y-0.5 hover:bg-red-400 hover:text-white hover:shadow"
+                  className="inline-flex w-fit items-center gap-2 rounded-full border border-sand-200 px-5 py-3 text-xs font-bold uppercase tracking-[0.2em] text-yellow-300 transition hover:-translate-y-0.5 bg-red-500 hover:text-white hover:shadow"
                 >
                   <MapPin className="h-4 w-4" />
                   Buka Google Maps
