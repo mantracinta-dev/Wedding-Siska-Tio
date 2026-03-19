@@ -1,11 +1,18 @@
 "use client";
 
-import { PenLine, Send, AlertCircle } from "lucide-react";
+import {
+  PenLine,
+  Send,
+  AlertCircle,
+  X,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 import {
   GUESTBOOK_LIMITS,
   useGuestbookViewModel,
 } from "@/features/guestbook/useGuestbookViewModel";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 
 type GuestbookProps = {
@@ -46,6 +53,16 @@ export default function Guestbook({ guestSlug, guestName }: GuestbookProps) {
 
   // Filter out own message from the "other guests" list
   const otherMessages = messages.filter((item) => item.guestSlug !== guestSlug);
+  const recentMessages = otherMessages.slice(0, 5);
+
+  const [showAllMessages, setShowAllMessages] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const ITEMS_PER_PAGE = 5;
+  const totalPages = Math.ceil(otherMessages.length / ITEMS_PER_PAGE);
+  const paginatedMessages = otherMessages.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE,
+  );
 
   const successRef = useRef<HTMLDivElement>(null);
   const marqueeRef = useRef<HTMLDivElement>(null);
@@ -67,6 +84,8 @@ export default function Guestbook({ guestSlug, guestName }: GuestbookProps) {
   }, [entry, isEditing]);
 
   useEffect(() => {
+    if (showAllMessages) return;
+
     let animationFrameId: number;
     let lastTime = performance.now();
     const speed = 40; // Kecepatan gerak lambat
@@ -97,7 +116,7 @@ export default function Guestbook({ guestSlug, guestName }: GuestbookProps) {
 
     animationFrameId = requestAnimationFrame(autoScroll);
     return () => cancelAnimationFrame(animationFrameId);
-  }, [otherMessages.length]);
+  }, [recentMessages.length, showAllMessages]);
 
   const handleMouseDown = (e: React.MouseEvent) => {
     isDragging.current = true;
@@ -261,76 +280,158 @@ export default function Guestbook({ guestSlug, guestName }: GuestbookProps) {
             </div>
           </div>
         ) : otherMessages.length > 0 ? (
-          <div className="relative flex w-full overflow-hidden">
-            <div
-              ref={marqueeRef}
-              className="flex w-full overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] cursor-grab active:cursor-grabbing [scroll-behavior:auto] touch-pan-x"
-              onMouseEnter={() => {
-                isHovered.current = true;
-              }}
-              onMouseLeave={handleMouseLeave}
-              onMouseDown={handleMouseDown}
-              onMouseUp={handleMouseUp}
-              onMouseMove={handleMouseMove}
-              onTouchStart={() => {
-                isHovered.current = true;
-                isDragging.current = true;
-              }}
-              onTouchEnd={() => {
-                isHovered.current = false;
-                isDragging.current = false;
-              }}
-            >
-              <div className="flex w-max shrink-0 items-start gap-4 px-4 pb-4 pt-1">
-                {/* Grup A (Original) */}
-                {otherMessages.map((item, idx) => (
-                  <div
-                    key={`a-${item.guestSlug}`}
-                    ref={idx === 0 ? firstItemRef : undefined}
-                    className="w-[320px] shrink-0 rounded-3xl border border-sand-200 bg-white p-6 shadow-sm whitespace-normal transition hover:-translate-y-1 hover:shadow-md"
-                  >
-                    <p className="text-base font-semibold text-ink-900 font-display">
-                      {item.name}
-                    </p>
-                    <p className="mt-3 text-sm leading-6 text-ink-500 line-clamp-5">
-                      "{item.message}"
-                    </p>
-                    {item.updatedAt && (
-                      <p className="mt-4 text-[10px] font-semibold uppercase tracking-[0.2em] text-sand-500">
-                        {new Date(item.updatedAt).toLocaleString("id-ID", {
-                          dateStyle: "medium",
-                          timeStyle: "short",
-                        })}
+          <div className="flex flex-col gap-6">
+            <div className="relative flex w-full overflow-hidden">
+              <div
+                ref={marqueeRef}
+                className="flex w-full overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] cursor-grab active:cursor-grabbing [scroll-behavior:auto] touch-pan-x"
+                onMouseEnter={() => {
+                  isHovered.current = true;
+                }}
+                onMouseLeave={handleMouseLeave}
+                onMouseDown={handleMouseDown}
+                onMouseUp={handleMouseUp}
+                onMouseMove={handleMouseMove}
+                onTouchStart={() => {
+                  isHovered.current = true;
+                  isDragging.current = true;
+                }}
+                onTouchEnd={() => {
+                  isHovered.current = false;
+                  isDragging.current = false;
+                }}
+              >
+                <div className="flex w-max shrink-0 items-start gap-4 px-4 pb-4 pt-1">
+                  {/* Grup A (Original) */}
+                  {recentMessages.map((item, idx) => (
+                    <div
+                      key={`a-${item.guestSlug}`}
+                      ref={idx === 0 ? firstItemRef : undefined}
+                      className="w-[320px] shrink-0 rounded-3xl border border-sand-200 bg-white p-6 shadow-sm whitespace-normal transition hover:-translate-y-1 hover:shadow-md"
+                    >
+                      <p className="text-base font-semibold text-ink-900 font-display">
+                        {item.name}
                       </p>
-                    )}
-                  </div>
-                ))}
+                      <p className="mt-3 text-sm leading-6 text-ink-500 line-clamp-5">
+                        "{item.message}"
+                      </p>
+                      {item.updatedAt && (
+                        <p className="mt-4 text-[10px] font-semibold uppercase tracking-[0.2em] text-sand-500">
+                          {new Date(item.updatedAt).toLocaleString("id-ID", {
+                            dateStyle: "medium",
+                            timeStyle: "short",
+                          })}
+                        </p>
+                      )}
+                    </div>
+                  ))}
 
-                {/* Grup B (Clone) */}
-                {otherMessages.map((item, idx) => (
-                  <div
-                    key={`b-${item.guestSlug}`}
-                    ref={idx === 0 ? midItemRef : undefined}
-                    className="w-[320px] shrink-0 rounded-3xl border border-sand-200 bg-white p-6 shadow-sm whitespace-normal transition hover:-translate-y-1 hover:shadow-md"
-                    aria-hidden="true"
-                  >
-                    <p className="text-base font-semibold text-ink-900 font-display">
-                      {item.name}
-                    </p>
-                    <p className="mt-3 text-sm leading-6 text-ink-500 line-clamp-5">
-                      "{item.message}"
-                    </p>
-                    {item.updatedAt && (
-                      <p className="mt-4 text-[10px] font-semibold uppercase tracking-[0.2em] text-sand-500">
-                        {new Date(item.updatedAt).toLocaleString("id-ID", {
-                          dateStyle: "medium",
-                          timeStyle: "short",
-                        })}
+                  {/* Grup B (Clone) */}
+                  {recentMessages.map((item, idx) => (
+                    <div
+                      key={`b-${item.guestSlug}`}
+                      ref={idx === 0 ? midItemRef : undefined}
+                      className="w-[320px] shrink-0 rounded-3xl border border-sand-200 bg-white p-6 shadow-sm whitespace-normal transition hover:-translate-y-1 hover:shadow-md"
+                      aria-hidden="true"
+                    >
+                      <p className="text-base font-semibold text-ink-900 font-display">
+                        {item.name}
                       </p>
-                    )}
-                  </div>
-                ))}
+                      <p className="mt-3 text-sm leading-6 text-ink-500 line-clamp-5">
+                        "{item.message}"
+                      </p>
+                      {item.updatedAt && (
+                        <p className="mt-4 text-[10px] font-semibold uppercase tracking-[0.2em] text-sand-500">
+                          {new Date(item.updatedAt).toLocaleString("id-ID", {
+                            dateStyle: "medium",
+                            timeStyle: "short",
+                          })}
+                        </p>
+                      )}
+                    </div>
+                  ))}
+                </div>
               </div>
+            </div>
+            <div className="flex justify-center px-6 transition-all duration-300">
+              {!showAllMessages ? (
+                <button
+                  type="button"
+                  onClick={() => setShowAllMessages(true)}
+                  className="inline-flex items-center gap-2 rounded-full border border-sand-200 bg-white px-6 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-ink-700 transition hover:-translate-y-0.5"
+                >
+                  Lihat Semua Ucapan ({otherMessages.length})
+                </button>
+              ) : (
+                <div className="w-full flex flex-col pt-4">
+                  <div className="flex items-center justify-between border-b border-sand-200 pb-4 mb-6">
+                    <h3 className="font-display text-xl font-semibold text-ink-900">
+                      Semua Ucapan Tamu
+                    </h3>
+                    <button
+                      type="button"
+                      onClick={() => setShowAllMessages(false)}
+                      className="inline-flex items-center gap-2 rounded-full p-2 text-xs font-semibold uppercase tracking-[0.2em] text-ink-500 transition hover:bg-sand-100/50 hover:text-ink-900"
+                    >
+                      Tutup <X className="h-4 w-4" />
+                    </button>
+                  </div>
+
+                  <div className="grid gap-4 w-full">
+                    {paginatedMessages.map((item) => (
+                      <div
+                        key={item.guestSlug}
+                        className="rounded-3xl border border-sand-200 bg-white/60 p-6 shadow-sm text-left"
+                      >
+                        <p className="font-display text-base font-semibold text-ink-900">
+                          {item.name}
+                        </p>
+                        <p className="mt-3 text-sm leading-6 text-ink-500">
+                          "{item.message}"
+                        </p>
+                        {item.updatedAt && (
+                          <p className="mt-4 text-[10px] font-semibold uppercase tracking-[0.2em] text-sand-500">
+                            {new Date(item.updatedAt).toLocaleString("id-ID", {
+                              dateStyle: "medium",
+                              timeStyle: "short",
+                            })}
+                          </p>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+
+                  {totalPages > 1 && (
+                    <div className="flex items-center justify-between mt-6 pt-4 border-t border-sand-200">
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setCurrentPage((p) => Math.max(1, p - 1))
+                        }
+                        disabled={currentPage === 1}
+                        className="inline-flex items-center gap-1 rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-ink-700 transition hover:bg-white disabled:opacity-30 disabled:hover:bg-transparent"
+                      >
+                        <ChevronLeft className="h-4 w-4 shrink-0" />
+                        Sebelumnya
+                      </button>
+                      <span className="text-xs font-semibold text-sand-500">
+                        {currentPage} / {totalPages}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setCurrentPage((p) => Math.min(totalPages, p + 1))
+                        }
+                        disabled={currentPage === totalPages}
+                        className="inline-flex items-center gap-1 rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-ink-700 transition hover:bg-white disabled:opacity-30 disabled:hover:bg-transparent"
+                      >
+                        Selanjutnya
+                        <ChevronRight className="h-4 w-4 shrink-0" />
+                      </button>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         ) : (
