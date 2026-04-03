@@ -16,6 +16,7 @@ import { AUDIO_TRACK, EVENT_DETAILS, MAP_URL } from "@/lib/event";
 import type { GuestProfile } from "@/lib/guests";
 import {
   CalendarDays,
+  CalendarPlus,
   MapPin,
   Music4,
   Volume2,
@@ -173,6 +174,12 @@ export default function InvitationExperience({
 
   const musicActive = isAudioActive && !isMusicMuted;
 
+  const calendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
+    "Pernikahan Siska & Setio"
+  )}&dates=20260502T020000Z/20260502T080000Z&details=${encodeURIComponent(
+    "Kehadiranmu adalah doa terindah untuk kami."
+  )}&location=${encodeURIComponent(EVENT_DETAILS.ceremony.address)}`;
+
   return (
     <>
       <main ref={containerRef} className="min-h-screen text-ink-900 bg-pattern">
@@ -319,6 +326,17 @@ export default function InvitationExperience({
                       {EVENT_DETAILS.ceremony.dateLabel}
                     </p>
                     <CountdownTicker countdown={countdown} />
+                    <div className="mt-6 flex justify-center">
+                      <a
+                        href={calendarUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-2 rounded-full border border-sand-200 bg-white px-5 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-ink-700 transition hover:-translate-y-0.5 hover:shadow cursor-pointer"
+                      >
+                        <CalendarPlus className="h-4 w-4" />
+                        Simpan di Kalender
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
