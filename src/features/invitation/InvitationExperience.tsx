@@ -17,8 +17,9 @@ import type { GuestProfile } from "@/lib/guests";
 import {
   CalendarDays,
   MapPin,
-  Music2,
   Music4,
+  Volume2,
+  VolumeOff,
   X,
   ChevronsDown,
 } from "lucide-react";
@@ -180,11 +181,6 @@ export default function InvitationExperience({
     return () => window.removeEventListener("keydown", handleKey);
   }, [activePhoto, closeLightbox]);
 
-  const musicLabel = !isAudioActive
-    ? "Play Music"
-    : isMusicMuted
-      ? "Unmute Music"
-      : "Mute Music";
   const musicActive = isAudioActive && !isMusicMuted;
 
   return (
@@ -222,7 +218,7 @@ export default function InvitationExperience({
                 Undangan Pernikahan
               </p>
               <h1 className="font-display text-4xl text-ink-900 sm:text-5xl">
-                Siska & Tio
+                Siska & Setio
               </h1>
               <div className="text-sm text-ink-500">
                 <p className="text-xs font-semibold uppercase tracking-[0.3em] text-ink-500">
@@ -263,20 +259,10 @@ export default function InvitationExperience({
                   )}
                 </button>
               </div>
-              {!isOpened && (
-                <p className="text-xs uppercase tracking-[0.3em] text-ink-400 flex gap-1">
-                  <Music4 className="w-4 h-4" /> {AUDIO_TRACK.title} ·{" "}
-                  {AUDIO_TRACK.composer}
-                </p>
-              )}
-
-              {audioError && (
-                <p className="text-xs text-rose-600">{audioError}</p>
-              )}
             </div>
 
             {!isOpened && (
-              <div className="mt-10 grid gap-4 md:grid-cols-2">
+              <div className="mt-6 grid gap-4 md:grid-cols-2">
                 <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-sand-200 shadow-inner">
                   <Image
                     src="/other/forever.webp"
@@ -301,9 +287,19 @@ export default function InvitationExperience({
                     {EVENT_DETAILS.ceremony.dateLabel}
                   </p>
                   <p className="mt-2 text-sm text-ink-500">
-                    Pandeglang — Satu hari penuh kebahagiaan
+                    Pandeglang, Banten
                   </p>
                 </div>
+                {!isOpened && (
+                  <p className="text-xs uppercase tracking-[0.3em] text-ink-400 flex justify-center gap-1">
+                    <Music4 className="w-4 h-4 mr-2" /> {AUDIO_TRACK.title} ·{" "}
+                    {AUDIO_TRACK.composer}
+                  </p>
+                )}
+
+                {audioError && (
+                  <p className="text-xs text-rose-600">{audioError}</p>
+                )}
               </div>
             )}
           </div>
@@ -374,15 +370,17 @@ export default function InvitationExperience({
                     </div>
                   ))}
                 </div>
-                <a
-                  href={MAP_URL}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex w-fit items-center gap-2 rounded-full border border-sand-200 px-5 py-3 text-xs font-bold uppercase tracking-[0.2em] text-yellow-300 transition hover:-translate-y-0.5 bg-red-500 hover:text-white hover:shadow"
-                >
-                  <MapPin className="h-4 w-4" />
-                  Buka Google Maps
-                </a>
+                <div className="flex justify-center">
+                  <a
+                    href={MAP_URL}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex w-fit items-center gap-2 rounded-full border border-sand-200 px-5 py-3 text-white text-xs font-bold uppercase tracking-[0.2em] transition hover:-translate-y-0.5 bg-black hover:text-white hover:shadow"
+                  >
+                    <MapPin className="h-4 w-4" />
+                    Kunjungi Lokasi
+                  </a>
+                </div>
               </div>
             </section>
 
@@ -474,17 +472,33 @@ export default function InvitationExperience({
           </div>
         </div>
       )}
-      <button
-        type="button"
-        onClick={handleMusicControl}
-        aria-pressed={musicActive}
-        className="fixed bottom-[calc(1.5rem+env(safe-area-inset-bottom))] right-[calc(1.5rem+env(safe-area-inset-right))] z-40 inline-flex items-center gap-2 rounded-full bg-white/90 px-5 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-ink-700 shadow-card backdrop-blur transition hover:-translate-y-0.5"
+      <div
+        hidden={!isOpened}
+        className="fixed bottom-[calc(1.5rem+env(safe-area-inset-bottom))] right-[calc(1.5rem+env(safe-area-inset-right))] z-40 flex flex-col gap-3"
       >
-        <Music2
-          className={`h-4 w-4 ${musicActive ? "text-sand-700" : "text-ink-300"}`}
-        />
-        {musicLabel}
-      </button>
+        <a
+          href={MAP_URL}
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Buka Google Maps"
+          className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/90 text-ink-700 shadow-card backdrop-blur transition hover:-translate-y-0.5"
+        >
+          <MapPin className="h-5 w-5 text-sand-700" />
+        </a>
+        <button
+          type="button"
+          onClick={handleMusicControl}
+          aria-pressed={musicActive}
+          aria-label="Toggle musik"
+          className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/90 text-ink-700 shadow-card backdrop-blur transition hover:-translate-y-0.5"
+        >
+          {musicActive ? (
+            <Volume2 className="h-5 w-5 text-sand-700" />
+          ) : (
+            <VolumeOff className="h-5 w-5 text-ink-300" />
+          )}
+        </button>
+      </div>
     </>
   );
 }

@@ -1,12 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { Copy, MapPin } from "lucide-react";
+import { Copy, MapPin, Gift, ChevronDown, ChevronUp } from "lucide-react";
 
 import { GIFT_ACCOUNTS, PHYSICAL_GIFT_ADDRESS } from "@/lib/gifts";
 
 export default function DigitalEnvelopeGift() {
   const [copiedId, setCopiedId] = useState<string | null>(null);
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleCopy = async (id: string, text: string) => {
     try {
@@ -43,66 +44,83 @@ export default function DigitalEnvelopeGift() {
             atau mengirimkannya ke alamat kami.
           </h2>
         </div>
-        <div className="grid gap-4 sm:grid-cols-2">
-          {GIFT_ACCOUNTS.map((account) => (
-            <div
-              key={account.id}
-              className="rounded-[30px] border border-sand-100 bg-white/90 p-6 shadow-card"
-            >
-              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-sand-700">
-                {account.owner === "siska" ? "Rekening Siska" : "Rekening Tio"}
-              </p>
+
+        <div className="flex justify-center mt-2">
+          <button
+            type="button"
+            onClick={() => setIsOpen(!isOpen)}
+            className="inline-flex items-center gap-2 rounded-full bg-ink-900 px-6 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-white transition hover:-translate-y-0.5 hover:shadow cursor-pointer"
+          >
+            <Gift className="h-4 w-4" />
+            {isOpen ? "Tutup" : "Kirim Hadiah"}
+            {isOpen ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+          </button>
+        </div>
+
+        {isOpen && (
+          <div className="flex flex-col gap-6 transform transition-all duration-500 ease-in-out opacity-100 translate-y-0">
+            <div className="grid gap-4 sm:grid-cols-2">
+              {GIFT_ACCOUNTS.map((account) => (
+                <div
+                  key={account.id}
+                  className="rounded-[30px] border border-sand-100 bg-white/90 p-6 shadow-card"
+                >
+                  <p className="text-xs font-semibold uppercase tracking-[0.3em] text-sand-700">
+                    {account.owner === "siska" ? "Rekening Siska" : "Rekening Tio"}
+                  </p>
+                  <p className="mt-3 text-sm font-semibold text-ink-700">
+                    {account.bank === "Dana" ? "E-wallet" : "Bank"} {account.bank}
+                  </p>
+                  <p className="mt-1 text-2xl font-semibold text-ink-900">
+                    {account.accountNumber}
+                  </p>
+                  <p className="text-sm text-ink-500">a.n. {account.accountName}</p>
+                  <button
+                    type="button"
+                    onClick={() => handleCopy(account.id, account.accountNumber)}
+                    className="mt-4 inline-flex items-center gap-2 rounded-full border border-sand-200 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-ink-700 transition hover:-translate-y-0.5 hover:shadow"
+                  >
+                    <Copy className="h-4 w-4" />
+                    {copiedId === account.id ? "Tersalin" : "Salin Nomor"}
+                  </button>
+                </div>
+              ))}
+            </div>
+            <div className="rounded-[30px] border border-sand-100 bg-white/90 p-6 shadow-card">
+              <div className="mb-3 flex items-center gap-2">
+                <MapPin className="h-5 w-5 text-sand-700" />
+                <p className="text-xs font-semibold uppercase tracking-[0.3em] text-sand-700">
+                  Alamat Pengiriman Kado
+                </p>
+              </div>
               <p className="mt-3 text-sm font-semibold text-ink-700">
-                {account.bank === "Dana" ? "E-wallet" : "Bank"} {account.bank}
+                Penerima: {PHYSICAL_GIFT_ADDRESS.recipientName}
               </p>
-              <p className="mt-1 text-2xl font-semibold text-ink-900">
-                {account.accountNumber}
+              <p className="mt-2 text-sm leading-relaxed text-ink-900">
+                {PHYSICAL_GIFT_ADDRESS.addressLine1}
+                <br />
+                {PHYSICAL_GIFT_ADDRESS.addressLine2}
+                <br />
+                {PHYSICAL_GIFT_ADDRESS.provincePostal}
               </p>
-              <p className="text-sm text-ink-500">a.n. {account.accountName}</p>
               <button
                 type="button"
-                onClick={() => handleCopy(account.id, account.accountNumber)}
+                onClick={() =>
+                  handleCopy(
+                    PHYSICAL_GIFT_ADDRESS.id,
+                    PHYSICAL_GIFT_ADDRESS.fullText,
+                  )
+                }
                 className="mt-4 inline-flex items-center gap-2 rounded-full border border-sand-200 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-ink-700 transition hover:-translate-y-0.5 hover:shadow"
               >
                 <Copy className="h-4 w-4" />
-                {copiedId === account.id ? "Tersalin" : "Salin Nomor"}
+                {copiedId === PHYSICAL_GIFT_ADDRESS.id
+                  ? "Tersalin"
+                  : "Salin Alamat"}
               </button>
             </div>
-          ))}
-        </div>
-        <div className="rounded-[30px] border border-sand-100 bg-white/90 p-6 shadow-card">
-          <div className="mb-3 flex items-center gap-2">
-            <MapPin className="h-5 w-5 text-sand-700" />
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-sand-700">
-              Alamat Pengiriman Kado
-            </p>
           </div>
-          <p className="mt-3 text-sm font-semibold text-ink-700">
-            Penerima: {PHYSICAL_GIFT_ADDRESS.recipientName}
-          </p>
-          <p className="mt-2 text-sm leading-relaxed text-ink-900">
-            {PHYSICAL_GIFT_ADDRESS.addressLine1}
-            <br />
-            {PHYSICAL_GIFT_ADDRESS.addressLine2}
-            <br />
-            {PHYSICAL_GIFT_ADDRESS.provincePostal}
-          </p>
-          <button
-            type="button"
-            onClick={() =>
-              handleCopy(
-                PHYSICAL_GIFT_ADDRESS.id,
-                PHYSICAL_GIFT_ADDRESS.fullText,
-              )
-            }
-            className="mt-4 inline-flex items-center gap-2 rounded-full border border-sand-200 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-ink-700 transition hover:-translate-y-0.5 hover:shadow"
-          >
-            <Copy className="h-4 w-4" />
-            {copiedId === PHYSICAL_GIFT_ADDRESS.id
-              ? "Tersalin"
-              : "Salin Alamat"}
-          </button>
-        </div>
+        )}
       </div>
     </section>
   );

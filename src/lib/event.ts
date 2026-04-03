@@ -4,16 +4,18 @@ export const EVENT_DETAILS = {
   ceremony: {
     title: "Akad Nikah",
     dateLabel: "Sabtu, 02 Mei 2026",
-    time: "09.00 WIB",
-    location: "Masjid Agung Al-Azhar, Jakarta Selatan",
-    address: "Jl. Sisingamangaraja No.1, Kebayoran Baru",
+    time: "Pukul 09.00 WIB s/d Selesai",
+    location: "Parkiran Belakang Ria Busana",
+    address:
+      "Jl. Jenderal Ahmad Yani No.22 (Gg Dirgantara), Pandeglang, Kec. Pandeglang, Kabupaten Pandeglang, Banten 42211",
   },
   reception: {
     title: "Resepsi",
     dateLabel: "Sabtu, 02 Mei 2026",
-    time: "19.00 WIB",
-    location: "Plataran Hutan Kota, GBK",
-    address: "Jl. Jenderal Sudirman, Senayan",
+    time: "Pukul 11.00 WIB s/d Selesai",
+    location: "Parkiran Belakang Ria Busana",
+    address:
+      "Jl. Jenderal Ahmad Yani No.22 (Gg Dirgantara), Pandeglang, Kec. Pandeglang, Kabupaten Pandeglang, Banten 42211",
   },
 };
 

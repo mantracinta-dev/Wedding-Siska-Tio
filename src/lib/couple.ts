@@ -1,18 +1,16 @@
 export const COUPLE = {
   bride: {
-    fullName: "apt. Siska Mulyaningsih.S.Farm",
+    fullName: "Apt. Siska Mulyaningsih, S.Farm",
     nickname: "Siska",
-    parents: "Putri dari Bapak Musahar & Ibu Yarlis",
+    parents: "Putri kedua dari Bapak Musahar & Ibu Yarlis",
     photo: "/couple/ss.webp",
-    intro:
-      "Siska percaya bahwa cinta tumbuh dari doa yang dijaga dan keluarga yang selalu merangkul.",
+    intro: "",
   },
   groom: {
-    fullName: "apt. Setio Buana.S.Farm",
+    fullName: "Apt. Setio Buana, S.Farm",
     nickname: "Tio",
-    parents: "Putra dari Bapak Afrijoni & Ibu Ratmawati",
+    parents: "Putra pertama dari Bapak Afrijoni & Ibu Ratmawati",
     photo: "/couple/tt.webp",
-    intro:
-      "Tio menemukan makna perjalanan hidupnya saat bertemu Siska, sahabat sekaligus cintanya.",
+    intro: "",
   },
 };
