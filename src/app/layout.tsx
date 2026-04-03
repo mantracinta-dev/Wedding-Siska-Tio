@@ -13,16 +13,37 @@ const body = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Siska & Setio — Wedding Invitation",
+  title: {
+    default: "Siska & Setio — Wedding Invitation",
+    template: "%s | Siska & Setio Wedding",
+  },
   description:
-    "Undangan digital sinematik dengan animasi amplop, countdown, galeri, dan guestbook.",
+    "Undangan digital pernikahan Siska & Setio. Kami mengundang Anda untuk hadir dan berbagi kebahagiaan bersama kami.",
+
+  // Metadata untuk SEO & Crawling
+  authors: [{ name: "Siska & Setio" }],
+  keywords: [
+    "undangan digital",
+    "wedding invitation",
+    "Siska & Setio",
+    "Pandeglang",
+  ],
   openGraph: {
     title: "Siska & Setio Wedding Invitation",
-    description: "Kami mengundang Anda untuk hadir di momen bahagia kami.",
-    images: ["/other/forever.webp"],
+    description:
+      "Tanpa mengurangi rasa hormat, kami mengundang Anda untuk hadir di momen bahagia kami.",
+    url: "https://www.harisiskatio.web.id",
+    siteName: "Siska & Setio Wedding",
     type: "website",
     locale: "id_ID",
-    siteName: "Siska & Setio Wedding",
+    images: [
+      {
+        url: "https://www.harisiskatio.web.id/other/forever.webp",
+        width: 1200,
+        height: 630,
+        alt: "Siska & Setio Wedding Invitation",
+      },
+    ],
   },
 };
 
