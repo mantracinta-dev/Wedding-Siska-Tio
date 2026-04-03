@@ -39,10 +39,13 @@ export default function DigitalEnvelopeGift() {
             Amplop Digital
           </p>
           <h2 className="mt-3 font-display text-3xl text-ink-900">
+            Berbagi Kebahagiaan
+          </h2>
+          <p className="mt-4 text-sm leading-7 text-ink-500">
             Hadiah berupa doa adalah yang utama, namun jika memberi adalah
             ungkapan tanda kasih Anda, Anda dapat memberi kado secara cashless
             atau mengirimkannya ke alamat kami.
-          </h2>
+          </p>
         </div>
 
         <div className="flex justify-center mt-2">
@@ -53,7 +56,11 @@ export default function DigitalEnvelopeGift() {
           >
             <Gift className="h-4 w-4" />
             {isOpen ? "Tutup" : "Kirim Hadiah"}
-            {isOpen ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+            {isOpen ? (
+              <ChevronUp className="h-4 w-4" />
+            ) : (
+              <ChevronDown className="h-4 w-4" />
+            )}
           </button>
         </div>
 
@@ -66,18 +73,25 @@ export default function DigitalEnvelopeGift() {
                   className="rounded-[30px] border border-sand-100 bg-white/90 p-6 shadow-card"
                 >
                   <p className="text-xs font-semibold uppercase tracking-[0.3em] text-sand-700">
-                    {account.owner === "siska" ? "Rekening Siska" : "Rekening Tio"}
+                    {account.owner === "siska"
+                      ? "Rekening Siska"
+                      : "Rekening Tio"}
                   </p>
                   <p className="mt-3 text-sm font-semibold text-ink-700">
-                    {account.bank === "Dana" ? "E-wallet" : "Bank"} {account.bank}
+                    {account.bank === "Dana" ? "E-wallet" : "Bank"}{" "}
+                    {account.bank}
                   </p>
                   <p className="mt-1 text-2xl font-semibold text-ink-900">
                     {account.accountNumber}
                   </p>
-                  <p className="text-sm text-ink-500">a.n. {account.accountName}</p>
+                  <p className="text-sm text-ink-500">
+                    a.n. {account.accountName}
+                  </p>
                   <button
                     type="button"
-                    onClick={() => handleCopy(account.id, account.accountNumber)}
+                    onClick={() =>
+                      handleCopy(account.id, account.accountNumber)
+                    }
                     className="mt-4 inline-flex items-center gap-2 rounded-full border border-sand-200 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-ink-700 transition hover:-translate-y-0.5 hover:shadow"
                   >
                     <Copy className="h-4 w-4" />

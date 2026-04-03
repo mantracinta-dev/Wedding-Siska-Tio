@@ -177,7 +177,7 @@ export default function Guestbook({ guestSlug, guestName }: GuestbookProps) {
           Guestbook
         </p>
         <h3 className="text-2xl font-semibold text-ink-900">
-          Kirim ucapan untuk Siska &amp; Tio
+          Kirim ucapan untuk Siska &amp; Setio
         </h3>
         <p className="text-sm text-ink-500">
           Satu tamu satu pesan. Kamu bisa edit ucapan kapan saja.
