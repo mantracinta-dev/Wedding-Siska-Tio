@@ -175,9 +175,9 @@ export default function InvitationExperience({
   const musicActive = isAudioActive && !isMusicMuted;
 
   const calendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
-    "Pernikahan Siska & Setio"
+    "Pernikahan Siska & Setio",
   )}&dates=20260502T020000Z/20260502T080000Z&details=${encodeURIComponent(
-    "Kehadiranmu adalah doa terindah untuk kami."
+    "Kehadiranmu adalah doa terindah untuk kami.",
   )}&location=${encodeURIComponent(EVENT_DETAILS.ceremony.address)}`;
 
   return (

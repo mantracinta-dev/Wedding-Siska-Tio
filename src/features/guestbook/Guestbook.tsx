@@ -284,7 +284,7 @@ export default function Guestbook({ guestSlug, guestName }: GuestbookProps) {
             <div className="relative flex w-full overflow-hidden">
               <div
                 ref={marqueeRef}
-                className="flex w-full overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] cursor-grab active:cursor-grabbing [scroll-behavior:auto] touch-pan-x"
+                className="flex w-full overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] cursor-grab active:cursor-grabbing [scroll-behavior:auto]"
                 onMouseEnter={() => {
                   isHovered.current = true;
                 }}
