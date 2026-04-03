@@ -119,23 +119,13 @@ export default function InvitationExperience({
           ease: "power3.out",
           overwrite: true,
         });
-      const hide = (els: HTMLElement[] | HTMLElement) =>
-        gsap.to(els, {
-          autoAlpha: 0,
-          y: 40,
-          duration: 0.5,
-          overwrite: true,
-        });
 
       gsap.set(sections, { autoAlpha: 0, y: 40 });
 
       ScrollTrigger.batch(sections, {
-        start: "top 80%",
-        end: "bottom 15%",
+        start: "top 85%",
+        once: true,
         onEnter: (batch) => show(batch as HTMLElement[]),
-        onEnterBack: (batch) => show(batch as HTMLElement[]),
-        onLeave: (batch) => hide(batch as HTMLElement[]),
-        onLeaveBack: (batch) => hide(batch as HTMLElement[]),
       });
 
       requestAnimationFrame(() => ScrollTrigger.refresh());
