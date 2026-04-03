@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Space_Grotesk } from "next/font/google";
+import { DM_Serif_Text, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 
-const display = Playfair_Display({
+const display = DM_Serif_Text({
+  weight: "400",
   variable: "--font-display",
   subsets: ["latin"],
 });
