@@ -13,10 +13,18 @@ const body = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Siska & Tio — Wedding Invitation",
+  title: "Siska & Setio — Wedding Invitation",
   description:
     "Undangan digital sinematik dengan animasi amplop, countdown, galeri, dan guestbook.",
-}; 
+  openGraph: {
+    title: "Siska & Setio Wedding Invitation",
+    description: "Kami mengundang Anda untuk hadir di momen bahagia kami.",
+    images: ["/other/forever.webp"],
+    type: "website",
+    locale: "id_ID",
+    siteName: "Siska & Setio Wedding",
+  },
+};
 
 export default function RootLayout({
   children,
