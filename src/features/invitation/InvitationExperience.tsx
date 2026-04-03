@@ -182,7 +182,10 @@ export default function InvitationExperience({
 
   return (
     <>
-      <main ref={containerRef} className="min-h-screen text-ink-900 bg-pattern">
+      <main
+        ref={containerRef}
+        className="min-h-screen w-full overflow-x-hidden text-ink-900 bg-pattern"
+      >
         <section
           className={
             isOpened
@@ -192,25 +195,25 @@ export default function InvitationExperience({
           data-opening
         >
           <div
-            className="rounded-[32px] border border-white/70 bg-white/70 p-8 shadow-card backdrop-blur"
+            className="relative rounded-[32px] border border-white/70 bg-white/70 p-8 shadow-card backdrop-blur"
             data-opening
           >
+            <InteractiveButterfly
+              className="w-20 h-20 top-4 right-15"
+              baseRotate={-45}
+              isOpened={isOpened}
+              delay={0.15}
+            />
+            <InteractiveButterfly
+              className="w-20 h-20 top-4 left-4"
+              baseRotate={45}
+              isOpened={isOpened}
+              delay={0.3}
+            />
             <div
               className="flex flex-col items-center gap-6 text-center"
               data-opening
             >
-              <InteractiveButterfly
-                className="w-20 h-20 top-0 bottom-0"
-                baseRotate={-45}
-                isOpened={isOpened}
-                delay={0.15}
-              />
-              <InteractiveButterfly
-                className="w-20 h-20 top-0 left-0"
-                baseRotate={45}
-                isOpened={isOpened}
-                delay={0.3}
-              />
               <p className="text-xs font-semibold uppercase tracking-[0.4em] text-sand-700">
                 Undangan Pernikahan
               </p>
@@ -225,7 +228,7 @@ export default function InvitationExperience({
                   {resolvedGuest.name} {relationship}
                 </p>
               </div>
-              <p className="max-w-xl text-sm leading-7 text-ink-500">
+              <p className="max-w-xl text-base leading-relaxed text-ink-500">
                 {isOpened ? (
                   <>
                     Kami mengundangmu untuk hadir dalam momen paling hangat
@@ -315,7 +318,7 @@ export default function InvitationExperience({
                     <h2 className="mt-4 font-display text-4xl text-ink-900">
                       Merayakan perjalanan cinta yang hangat dan penuh doa
                     </h2>
-                    <p className="mt-4 text-sm leading-7 text-ink-500">
+                    <p className="mt-4 text-base leading-relaxed text-ink-500">
                       Dengan penuh rasa syukur, kami mengundangmu untuk
                       merayakan hari istimewa kami. Hadirnya kamu menjadi bagian
                       dari kenangan terindah dalam hidup kami.
@@ -401,7 +404,7 @@ export default function InvitationExperience({
                   <h2 className="mt-3 font-display text-3xl text-ink-900">
                     Momen-momen yang memeluk kisah kami
                   </h2>
-                  <p className="mt-4 text-sm leading-7 text-ink-500">
+                  <p className="mt-4 text-base leading-relaxed text-ink-500">
                     "Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia
                     menciptakan pasangan-pasangan untukmu dari jenismu sendiri,
                     agar kamu cenderung dan merasa tenteram kepadanya, dan Dia
@@ -431,7 +434,7 @@ export default function InvitationExperience({
                 <h2 className="mt-4 font-display text-3xl text-ink-900">
                   Kehadiranmu adalah doa terindah
                 </h2>
-                <p className="mt-4 text-sm leading-7 text-ink-500">
+                <p className="mt-4 text-base leading-relaxed text-ink-500">
                   "Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila
                   Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan do'a restu
                   kepada kedua mempelai. "<br />
@@ -489,7 +492,7 @@ export default function InvitationExperience({
           target="_blank"
           rel="noreferrer"
           aria-label="Buka Google Maps"
-          className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/90 text-ink-700 shadow-card backdrop-blur transition hover:-translate-y-0.5"
+          className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/90 text-ink-700 shadow-xl border border-sand-200 backdrop-blur transition hover:-translate-y-0.5"
         >
           <MapPin className="h-5 w-5 text-sand-700" />
         </a>
@@ -498,7 +501,7 @@ export default function InvitationExperience({
           onClick={handleMusicControl}
           aria-pressed={musicActive}
           aria-label="Toggle musik"
-          className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/90 text-ink-700 shadow-card backdrop-blur transition hover:-translate-y-0.5"
+          className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/90 text-ink-700 shadow-xl border border-sand-200 backdrop-blur transition hover:-translate-y-0.5"
         >
           {musicActive ? (
             <Volume2 className="h-5 w-5 text-sand-700" />

@@ -41,7 +41,7 @@ export default function DigitalEnvelopeGift() {
           <h2 className="mt-3 font-display text-3xl text-ink-900">
             Berbagi Kebahagiaan
           </h2>
-          <p className="mt-4 text-sm leading-7 text-ink-500">
+          <p className="mt-4 text-base leading-relaxed text-ink-500">
             Hadiah berupa doa adalah yang utama, namun jika memberi adalah
             ungkapan tanda kasih Anda, Anda dapat memberi kado secara cashless
             atau mengirimkannya ke alamat kami.

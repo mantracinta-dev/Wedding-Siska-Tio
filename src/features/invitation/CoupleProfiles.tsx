@@ -19,7 +19,7 @@ export default function CoupleProfiles() {
         <h2 className="font-display text-3xl text-ink-900">
           Dua hati yang dipertemukan dalam doa
         </h2>
-        <p className="max-w-2xl text-sm leading-7 text-ink-500">
+        <p className="max-w-2xl text-base leading-relaxed text-ink-500">
           Maha suci Allah yang telah menciptakan mahluk-Nya berpasang-pasangan.
           Ya Allah, perkenankanlah kami merangkaikan kasih sayang yang Kau
           ciptakan diantara kami untuk mengikuti Sunnah Rasul-Mu dalam rangka
@@ -63,7 +63,7 @@ export default function CoupleProfiles() {
               <p className="text-sm font-medium text-ink-500">
                 {profile.parents}
               </p>
-              <p className="text-sm leading-7 text-ink-500">{profile.intro}</p>
+              <p className="text-base leading-relaxed text-ink-500">{profile.intro}</p>
             </div>
           </article>
         ))}

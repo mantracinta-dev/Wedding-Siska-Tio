@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DM_Serif_Text, Space_Grotesk } from "next/font/google";
+import { DM_Serif_Text, Open_Sans } from "next/font/google";
 import "./globals.css";
 
 const display = DM_Serif_Text({
@@ -8,7 +8,7 @@ const display = DM_Serif_Text({
   subsets: ["latin"],
 });
 
-const body = Space_Grotesk({
+const body = Open_Sans({
   variable: "--font-body",
   subsets: ["latin"],
 });
