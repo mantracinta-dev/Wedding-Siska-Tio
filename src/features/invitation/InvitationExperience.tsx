@@ -199,13 +199,13 @@ export default function InvitationExperience({
             data-opening
           >
             <InteractiveButterfly
-              className="w-20 h-20 top-4 right-15"
+              className="w-20 h-20 top-8 md:top-4 right-15"
               baseRotate={-45}
               isOpened={isOpened}
               delay={0.15}
             />
             <InteractiveButterfly
-              className="w-20 h-20 top-4 left-4"
+              className="w-20 h-20 top-12 md:top-4 left-0 md:left-4"
               baseRotate={45}
               isOpened={isOpened}
               delay={0.3}
