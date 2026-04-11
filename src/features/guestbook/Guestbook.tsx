@@ -175,9 +175,7 @@ export default function Guestbook({ guestSlug, guestName }: GuestbookProps) {
   return (
     <div className="w-full rounded-3xl bg-white/70 py-6 overflow-hidden shadow-card backdrop-blur">
       <div className="flex flex-col gap-2 px-6">
-        <p className="text-sm font-semibold uppercase tracking-[0.25em] text-sand-700">
-          Guestbook
-        </p>
+        <p className="text-base font-playwrite text-sand-700">Guestbook</p>
         <h3 className="text-2xl font-semibold text-ink-900">
           {isGenericGuest
             ? "Ucapan & Doa Restu"
@@ -282,7 +280,7 @@ export default function Guestbook({ guestSlug, guestName }: GuestbookProps) {
       )}
 
       <div className="mt-12 w-full overflow-hidden">
-        <p className="mb-6 px-6 text-xs font-semibold uppercase tracking-[0.3em] text-sand-700">
+        <p className="mb-6 px-6 text-base font-playwrite text-sand-700">
           Ucapan Tamu Lain
         </p>
 

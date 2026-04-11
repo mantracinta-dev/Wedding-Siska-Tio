@@ -393,7 +393,7 @@ export default function InvitationExperience({
             <section data-scroll-section>
               <div className="flex flex-col gap-6">
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.35em] text-sand-700">
+                  <p className="text-base font-playwrite text-sand-700">
                     Detail Acara
                   </p>
                   <h2 className="mt-3 font-display text-3xl text-ink-900">
@@ -433,10 +433,10 @@ export default function InvitationExperience({
                         <p className="mt-4 text-2xl font-display text-ink-900 md:text-3xl">
                           {event.dateLabel}
                         </p>
-                        <p className="mt-2 text-sm text-ink-500 mb-8">
+                        <p className="mt-2 text-base sm:text-xl text-ink-500 mb-8">
                           {event.time}
                         </p>
-                        <p className="mt-4 text-sm font-bold uppercase tracking-widest text-ink-900">
+                        <p className="mt-20 text-sm sm:text-xl font-bold uppercase text-ink-900">
                           {event.location}
                         </p>
                         <p className="mt-2 text-sm text-ink-500 leading-relaxed max-w-[250px] mx-auto">
@@ -451,9 +451,12 @@ export default function InvitationExperience({
                     href={MAP_URL}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex w-fit items-center gap-2 rounded-full border border-sand-200 px-5 py-3 text-white text-xs font-bold uppercase tracking-[0.2em] transition hover:-translate-y-0.5 bg-black hover:text-white hover:shadow"
+                    className="relative inline-flex w-fit items-center gap-2 rounded-full border border-sand-200 px-5 py-3 text-white text-xs font-bold uppercase tracking-[0.2em] transition hover:-translate-y-0.5 bg-black hover:text-white hover:shadow group"
                   >
-                    <MapPin className="h-4 w-4" />
+                    <div className="relative flex h-4 w-4 items-center justify-center">
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white/80"></span>
+                      <MapPin className="relative h-4 w-4 group-hover:animate-none" />
+                    </div>
                     Kunjungi Lokasi
                   </a>
                 </div>
@@ -463,7 +466,7 @@ export default function InvitationExperience({
             <section data-scroll-section>
               <div className="flex flex-col gap-6">
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.35em] text-sand-700">
+                  <p className="text-base font-playwrite text-sand-700">
                     Gallery
                   </p>
                   <h2 className="mt-3 font-display text-3xl text-ink-900">
@@ -493,16 +496,18 @@ export default function InvitationExperience({
 
             <section className="pb-20" data-scroll-section>
               <div className="rounded-3xl border border-sand-200 bg-white/80 p-8 text-center shadow-card bg-card">
-                <p className="text-xs font-semibold uppercase tracking-[0.35em] text-sand-700">
+                <p className="text-base font-playwrite text-sand-700">
                   Terima Kasih
                 </p>
                 <h2 className="mt-4 font-display text-3xl text-ink-900">
                   Kehadiranmu adalah doa terindah
                 </h2>
-                <p className="mt-4 text-base leading-relaxed text-ink-500">
+                <p className="mt-4 text-xs sm:text-base leading-relaxed text-ink-500">
                   "Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila
                   Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan do'a restu
-                  kepada kedua mempelai. "<br />
+                  kepada kedua mempelai.
+                </p>
+                <p className="mt-5 font-playwrite text-sm md:text-3xl text-sand-700">
                   Wassalamu'alaikum Warahmatullahi Wabarakatuh.
                 </p>
               </div>
@@ -552,15 +557,18 @@ export default function InvitationExperience({
         hidden={!isOpened}
         className="fixed bottom-[calc(1.5rem+env(safe-area-inset-bottom))] right-[calc(1.5rem+env(safe-area-inset-right))] z-40 flex flex-col gap-3"
       >
-        <a
-          href={MAP_URL}
-          target="_blank"
-          rel="noreferrer"
-          aria-label="Buka Google Maps"
-          className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/90 text-ink-700 shadow-xl border border-sand-200 backdrop-blur transition hover:-translate-y-0.5"
-        >
-          <MapPin className="h-5 w-5 text-sand-700" />
-        </a>
+        <div className="relative flex">
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-sand-400 opacity-60"></span>
+          <a
+            href={MAP_URL}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Buka Google Maps"
+            className="relative inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/90 text-ink-700 shadow-xl border border-sand-200 backdrop-blur transition hover:-translate-y-0.5"
+          >
+            <MapPin className="h-5 w-5 text-sand-700" />
+          </a>
+        </div>
         <button
           type="button"
           onClick={handleMusicControl}

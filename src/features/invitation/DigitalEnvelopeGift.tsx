@@ -35,7 +35,7 @@ export default function DigitalEnvelopeGift() {
     <section data-scroll-section>
       <div className="flex flex-col gap-6">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.35em] text-sand-700">
+          <p className="text-base font-playwrite text-sand-700">
             Amplop Digital
           </p>
           <h2 className="mt-3 font-display text-3xl text-ink-900">
@@ -52,9 +52,12 @@ export default function DigitalEnvelopeGift() {
           <button
             type="button"
             onClick={() => setIsOpen(!isOpen)}
-            className="inline-flex items-center gap-2 rounded-full bg-ink-900 px-6 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-white transition hover:-translate-y-0.5 hover:shadow cursor-pointer"
+            className="group relative inline-flex items-center gap-2 rounded-full bg-ink-900 px-6 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-white shadow transition hover:-translate-y-0.5 hover:shadow-lg cursor-pointer"
           >
-            <Gift className="h-4 w-4" />
+            <div className="relative flex h-4 w-4 items-center justify-center">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-80"></span>
+              <Gift className="relative h-4 w-4 group-hover:animate-none" />
+            </div>
             {isOpen ? "Tutup" : "Kirim Hadiah"}
             {isOpen ? (
               <ChevronUp className="h-4 w-4" />
