@@ -32,7 +32,7 @@ export default function CountdownTicker({ countdown }: CountdownTickerProps) {
       {UNITS.map((unit) => (
         <div
           key={unit.key}
-          className="rounded-2xl border border-sand-200 bg-white px-4 py-5 text-center"
+          className="rounded-2xl border border-white shadow bg-white px-4 py-5 text-center"
         >
           <p className="text-2xl font-semibold text-ink-900">
             {formatValue(countdown[unit.key] as number)}

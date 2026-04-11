@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DM_Serif_Text, Open_Sans } from "next/font/google";
+import { DM_Serif_Text, Open_Sans, Playwrite_AU_TAS } from "next/font/google";
 import "./globals.css";
 
 const display = DM_Serif_Text({
@@ -11,6 +11,10 @@ const display = DM_Serif_Text({
 const body = Open_Sans({
   variable: "--font-body",
   subsets: ["latin"],
+});
+
+const playwrite = Playwrite_AU_TAS({
+  variable: "--font-playwrite",
 });
 
 export const metadata: Metadata = {
@@ -55,7 +59,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="id">
-      <body className={`${display.variable} ${body.variable} antialiased`}>
+      <body
+        className={`${display.variable} ${body.variable} ${playwrite.variable} antialiased`}
+      >
         {children}
       </body>
     </html>

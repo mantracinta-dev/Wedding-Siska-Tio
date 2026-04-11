@@ -199,7 +199,9 @@ export default function Guestbook({ guestSlug, guestName }: GuestbookProps) {
             >
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <p className="text-lg font-semibold text-ink-900">{entry.name}</p>
+                  <p className="text-lg font-semibold text-ink-900">
+                    {entry.name}
+                  </p>
                   <p className="mt-2 text-base leading-relaxed text-ink-500">
                     {entry.message}
                   </p>
@@ -224,9 +226,14 @@ export default function Guestbook({ guestSlug, guestName }: GuestbookProps) {
               </div>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="mt-6 flex flex-col gap-4 px-6">
+            <form
+              onSubmit={handleSubmit}
+              className="mt-6 flex flex-col gap-4 px-6"
+            >
               <div className="grid gap-3">
-                <label className="text-sm font-semibold text-ink-700">Nama</label>
+                <label className="text-sm font-semibold text-ink-700">
+                  Nama
+                </label>
                 <input
                   value={name}
                   onChange={(event) => setName(event.target.value)}
@@ -237,7 +244,9 @@ export default function Guestbook({ guestSlug, guestName }: GuestbookProps) {
                 />
               </div>
               <div className="grid gap-3">
-                <label className="text-sm font-semibold text-ink-700">Ucapan</label>
+                <label className="text-sm font-semibold text-ink-700">
+                  Ucapan
+                </label>
                 <textarea
                   value={message}
                   onChange={(event) => setMessage(event.target.value)}

@@ -195,9 +195,25 @@ export default function InvitationExperience({
           data-opening
         >
           <div
-            className="relative rounded-[32px] border border-white/70 bg-white/70 p-8 shadow-card backdrop-blur"
+            className="relative rounded-[32px] border border-white bg-white/70 p-8 shadow-card backdrop-blur bg-card"
             data-opening
           >
+            <div className="absolute -left-1 -top-3 h-32 w-32 pointer-events-none z-0 md:h-44 md:w-44">
+              <Image
+                src="/other/flower-corner.png"
+                alt="Flower Ornament Left"
+                fill
+                className="object-contain object-left-top"
+              />
+            </div>
+            <div className="absolute scale-x-[-1] -right-1 -top-3 h-32 w-32 pointer-events-none z-0 md:h-44 md:w-44">
+              <Image
+                src="/other/flower-corner.png"
+                alt="Flower Ornament Left"
+                fill
+                className="object-contain object-left-top"
+              />
+            </div>
             <InteractiveButterfly
               className="w-20 h-20 top-8 md:top-4 right-15"
               baseRotate={-45}
@@ -210,6 +226,22 @@ export default function InvitationExperience({
               isOpened={isOpened}
               delay={0.3}
             />
+            <div className="absolute -left-1 scale-y-[-1] -bottom-3 h-32 w-32 pointer-events-none z-0 md:h-44 md:w-44">
+              <Image
+                src="/other/flower-corner.png"
+                alt="Flower Ornament Left"
+                fill
+                className="object-contain object-left-top"
+              />
+            </div>
+            <div className="absolute scale-x-[-1] scale-y-[-1] -right-1 -bottom-3 h-32 w-32 pointer-events-none z-0 md:h-44 md:w-44">
+              <Image
+                src="/other/flower-corner.png"
+                alt="Flower Ornament Left"
+                fill
+                className="object-contain object-left-top"
+              />
+            </div>
             <div
               className="flex flex-col items-center gap-6 text-center"
               data-opening
@@ -228,7 +260,7 @@ export default function InvitationExperience({
                   {resolvedGuest.name} {relationship}
                 </p>
               </div>
-              <p className="max-w-xl text-base leading-relaxed text-ink-500">
+              <p className="max-w-xl sm:text-base text-xs  leading-relaxed text-ink-500">
                 {isOpened ? (
                   <>
                     Kami mengundangmu untuk hadir dalam momen paling hangat
@@ -263,7 +295,7 @@ export default function InvitationExperience({
 
             {!isOpened && (
               <div className="mt-6 grid gap-4 md:grid-cols-2">
-                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-sand-200 shadow-inner">
+                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-white shadow-inner">
                   <Image
                     src="/other/forever.webp"
                     alt="wedding"
@@ -274,7 +306,7 @@ export default function InvitationExperience({
                   />
                 </div>
                 <div
-                  className="flex flex-col justify-center rounded-3xl border border-sand-200 bg-white/80 p-6"
+                  className="flex flex-col justify-center rounded-3xl border border-white shadow bg-white/80 p-6"
                   data-opening
                 >
                   <div className="flex items-center gap-3 text-ink-700">
@@ -308,13 +340,24 @@ export default function InvitationExperience({
         {isOpened && (
           <div className="space-y-16" data-scroll-container id="hero-section">
             <section data-scroll-section>
+              <div className="text-center py-3 mb-12 text-sand-700">
+                <div className="">
+                  <p className="font-playwrite text-sm md:text-3xl tracking-normal normal-case">
+                    Assalamu'alaikum Warahmatullahi Wabarakatuh.
+                  </p>
+                  <p className="mt-4 text-sm md:text-lg leading-relaxed text-ink-500">
+                    "Maha suci Allah yang telah menciptakan mahluk-Nya
+                    berpasang-pasangan. Ya Allah, perkenankanlah kami
+                    merangkaikan kasih sayang yang Kau ciptakan diantara kami
+                    untuk mengikuti Sunnah Rasul-Mu dalam rangka membentuk
+                    keluarga yang sakinah, mawaddah, warahmah."
+                  </p>
+                </div>
+              </div>
               <div className="grid gap-6 md:grid-cols-2 items-center">
                 <HeroSlideshow />
                 <div className="flex flex-col gap-6">
                   <div>
-                    <p className="text-xs font-semibold uppercase tracking-[0.35em] text-sand-700">
-                      Assalamu'alaikum Warahmatullahi Wabarakatuh.
-                    </p>
                     <h2 className="mt-4 font-display text-4xl text-ink-900">
                       Merayakan perjalanan cinta yang hangat dan penuh doa
                     </h2>
@@ -324,7 +367,7 @@ export default function InvitationExperience({
                       dari kenangan terindah dalam hidup kami.
                     </p>
                   </div>
-                  <div className="rounded-3xl border border-sand-200 bg-white/70 p-6 shadow-card">
+                  <div className="rounded-3xl border border-white bg-white/70 p-6 shadow-card bg-card">
                     <p className="text-2xl text-center font-semibold text-ink-900">
                       {EVENT_DETAILS.ceremony.dateLabel}
                     </p>
@@ -334,7 +377,7 @@ export default function InvitationExperience({
                         href={calendarUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className="inline-flex items-center gap-2 rounded-full border border-sand-200 bg-white px-5 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-ink-700 transition hover:-translate-y-0.5 hover:shadow cursor-pointer"
+                        className="inline-flex items-center gap-2 rounded-full border border-black shadow bg-stone-100 px-5 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-ink-700 transition hover:-translate-y-0.5 hover:shadow cursor-pointer"
                       >
                         <CalendarPlus className="h-4 w-4" />
                         Simpan di Kalender
@@ -357,27 +400,49 @@ export default function InvitationExperience({
                     Dua momen berharga dalam satu hari bahagia
                   </h2>
                 </div>
-                <div className="grid gap-5 md:grid-cols-2">
+                <div className="grid gap-6 md:grid-cols-2">
                   {Object.values(EVENT_DETAILS).map((event) => (
                     <div
                       key={event.title}
-                      className="rounded-3xl border border-sand-200 bg-white/80 p-10 shadow-card"
+                      className="relative flex h-full flex-col justify-center rounded-[2rem] border border-sand-400 bg-card p-10 text-center shadow-card"
                     >
-                      <p className="text-xs font-semibold uppercase tracking-[0.3em] text-sand-700">
-                        {event.title}
-                      </p>
-                      <p className="mt-4 text-xl font-semibold text-ink-900">
-                        {event.dateLabel}
-                      </p>
-                      <p className="mt-2 text-sm text-ink-500 mb-10">
-                        {event.time}
-                      </p>
-                      <p className="mt-4 text-sm font-semibold text-ink-700">
-                        {event.location}
-                      </p>
-                      <p className="mt-2 text-sm text-ink-500">
-                        {event.address}
-                      </p>
+                      {/* Bunga Sudut Kiri Atas */}
+                      <div className="absolute -left-1 -top-3 h-32 w-32 pointer-events-none z-0 md:h-44 md:w-44">
+                        <Image
+                          src="/other/flower-corner.png"
+                          alt="Flower Ornament Left"
+                          fill
+                          className="object-contain object-left-top"
+                        />
+                      </div>
+
+                      {/* Bunga Sudut Kanan Bawah */}
+                      <div className="absolute -bottom-3 -right-1 h-32 w-32 rotate-180 pointer-events-none z-0 md:h-44 md:w-44">
+                        <Image
+                          src="/other/flower-corner.png"
+                          alt="Flower Ornament Right"
+                          fill
+                          className="object-contain object-left-top"
+                        />
+                      </div>
+
+                      <div className="relative z-10">
+                        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-sand-700">
+                          {event.title}
+                        </p>
+                        <p className="mt-4 text-2xl font-display text-ink-900 md:text-3xl">
+                          {event.dateLabel}
+                        </p>
+                        <p className="mt-2 text-sm text-ink-500 mb-8">
+                          {event.time}
+                        </p>
+                        <p className="mt-4 text-sm font-bold uppercase tracking-widest text-ink-900">
+                          {event.location}
+                        </p>
+                        <p className="mt-2 text-sm text-ink-500 leading-relaxed max-w-[250px] mx-auto">
+                          {event.address}
+                        </p>
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -427,7 +492,7 @@ export default function InvitationExperience({
             </section>
 
             <section className="pb-20" data-scroll-section>
-              <div className="rounded-3xl border border-sand-200 bg-white/80 p-8 text-center shadow-card">
+              <div className="rounded-3xl border border-sand-200 bg-white/80 p-8 text-center shadow-card bg-card">
                 <p className="text-xs font-semibold uppercase tracking-[0.35em] text-sand-700">
                   Terima Kasih
                 </p>
