@@ -1,10 +1,22 @@
 import type { Metadata } from "next";
-import { DM_Serif_Text, Open_Sans, Playwrite_AU_TAS } from "next/font/google";
+import {
+  Great_Vibes,
+  Open_Sans,
+  DM_Serif_Display,
+  Cormorant_Garamond,
+  Niconne,
+} from "next/font/google";
 import "./globals.css";
 
-const display = DM_Serif_Text({
+const display = DM_Serif_Display({
   weight: "400",
   variable: "--font-display",
+  subsets: ["latin"],
+});
+
+const nameStyle = Great_Vibes({
+  weight: "400",
+  variable: "--font-name-style",
   subsets: ["latin"],
 });
 
@@ -13,8 +25,17 @@ const body = Open_Sans({
   subsets: ["latin"],
 });
 
-const playwrite = Playwrite_AU_TAS({
-  variable: "--font-playwrite",
+
+const cormorant = Cormorant_Garamond({
+  weight: ["400", "600", "700"],
+  variable: "--font-cormorant",
+  subsets: ["latin"],
+});
+
+const niconne = Niconne({
+  weight: "400",
+  variable: "--font-niconne",
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
@@ -59,8 +80,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="id">
+      <head>
+        <link rel="preload" as="image" href="/other/bg-green.jpg" />
+      </head>
       <body
-        className={`${display.variable} ${body.variable} ${playwrite.variable} antialiased`}
+        className={`${display.variable} ${body.variable} ${nameStyle.variable} ${cormorant.variable} ${niconne.variable} antialiased`}
       >
         {children}
       </body>

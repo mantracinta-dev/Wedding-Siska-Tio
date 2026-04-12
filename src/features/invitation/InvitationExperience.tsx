@@ -24,7 +24,6 @@ import {
   X,
   ChevronsDown,
 } from "lucide-react";
-import InteractiveButterfly from "@/features/invitation/InteractiveButterfly";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -195,53 +194,9 @@ export default function InvitationExperience({
           data-opening
         >
           <div
-            className="relative rounded-[32px] border border-white bg-white/70 p-8 shadow-card backdrop-blur bg-card"
+            className="relative rounded-[32px] border-2 border-white bg-white/70 p-8 shadow-card backdrop-blur bg-card"
             data-opening
           >
-            <div className="absolute -left-1 -top-3 h-32 w-32 pointer-events-none z-0 md:h-44 md:w-44">
-              <Image
-                src="/other/flower-corner.png"
-                alt="Flower Ornament Left"
-                fill
-                className="object-contain object-left-top"
-              />
-            </div>
-            <div className="absolute scale-x-[-1] -right-1 -top-3 h-32 w-32 pointer-events-none z-0 md:h-44 md:w-44">
-              <Image
-                src="/other/flower-corner.png"
-                alt="Flower Ornament Left"
-                fill
-                className="object-contain object-left-top"
-              />
-            </div>
-            <InteractiveButterfly
-              className="w-20 h-20 top-8 md:top-4 right-15"
-              baseRotate={-45}
-              isOpened={isOpened}
-              delay={0.15}
-            />
-            <InteractiveButterfly
-              className="w-20 h-20 top-12 md:top-4 left-0 md:left-4"
-              baseRotate={45}
-              isOpened={isOpened}
-              delay={0.3}
-            />
-            <div className="absolute -left-1 scale-y-[-1] -bottom-3 h-32 w-32 pointer-events-none z-0 md:h-44 md:w-44">
-              <Image
-                src="/other/flower-corner.png"
-                alt="Flower Ornament Left"
-                fill
-                className="object-contain object-left-top"
-              />
-            </div>
-            <div className="absolute scale-x-[-1] scale-y-[-1] -right-1 -bottom-3 h-32 w-32 pointer-events-none z-0 md:h-44 md:w-44">
-              <Image
-                src="/other/flower-corner.png"
-                alt="Flower Ornament Left"
-                fill
-                className="object-contain object-left-top"
-              />
-            </div>
             <div
               className="flex flex-col items-center gap-6 text-center"
               data-opening
@@ -249,14 +204,14 @@ export default function InvitationExperience({
               <p className="text-xs font-semibold uppercase tracking-[0.4em] text-sand-700">
                 Undangan Pernikahan
               </p>
-              <h1 className="font-display text-4xl text-ink-900 sm:text-5xl">
+              <h1 className="font-name-style text-4xl text-ink-900 sm:text-5xl">
                 Siska & Setio
               </h1>
               <div className="text-sm text-ink-500">
                 <p className="text-xs font-semibold uppercase tracking-[0.3em] text-ink-500">
                   Kepada Yth
                 </p>
-                <p className="mt-2 text-lg font-semibold text-ink-900">
+                <p className="mt-2 text-2xl font-semibold text-ink-900">
                   {resolvedGuest.name} {relationship}
                 </p>
               </div>
@@ -295,18 +250,18 @@ export default function InvitationExperience({
 
             {!isOpened && (
               <div className="mt-6 grid gap-4 md:grid-cols-2">
-                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-white shadow-inner">
+                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border-2 border-white shadow-inner">
                   <Image
-                    src="/other/forever.webp"
+                    src="/other/together.jpg"
                     alt="wedding"
                     fill
-                    className="object-cover"
+                    className="object-cover object-center"
                     sizes="(min-width: 768px) 50vw, 100vw"
                     priority
                   />
                 </div>
                 <div
-                  className="flex flex-col justify-center rounded-3xl border border-white shadow bg-white/80 p-6"
+                  className="flex flex-col justify-center rounded-3xl border-2 border-white shadow bg-white/80 p-6"
                   data-opening
                 >
                   <div className="flex items-center gap-3 text-ink-700">
@@ -342,15 +297,15 @@ export default function InvitationExperience({
             <section data-scroll-section>
               <div className="text-center py-3 mb-12 text-sand-700">
                 <div className="">
-                  <p className="font-playwrite text-sm md:text-3xl tracking-normal normal-case">
-                    Assalamu'alaikum Warahmatullahi Wabarakatuh.
+                  <p className="font-niconne text-3xl md:text-4xl tracking-normal normal-case">
+                    Assalamu&apos;alaikum Warahmatullahi Wabarakatuh.
                   </p>
-                  <p className="mt-4 text-sm md:text-lg leading-relaxed text-ink-500">
-                    "Maha suci Allah yang telah menciptakan mahluk-Nya
+                  <p className="mt-4 text-sm md:text-lg leading-relaxed text-white">
+                    &quot;Maha suci Allah yang telah menciptakan mahluk-Nya
                     berpasang-pasangan. Ya Allah, perkenankanlah kami
                     merangkaikan kasih sayang yang Kau ciptakan diantara kami
                     untuk mengikuti Sunnah Rasul-Mu dalam rangka membentuk
-                    keluarga yang sakinah, mawaddah, warahmah."
+                    keluarga yang sakinah, mawaddah, warahmah.&quot;
                   </p>
                 </div>
               </div>
@@ -358,17 +313,17 @@ export default function InvitationExperience({
                 <HeroSlideshow />
                 <div className="flex flex-col gap-6">
                   <div>
-                    <h2 className="mt-4 font-display text-4xl text-ink-900">
+                    <h2 className="mt-4 font-display text-4xl text-sand-500">
                       Merayakan perjalanan cinta yang hangat dan penuh doa
                     </h2>
-                    <p className="mt-4 text-base leading-relaxed text-ink-500">
+                    <p className="mt-4 text-base leading-relaxed text-white">
                       Dengan penuh rasa syukur, kami mengundangmu untuk
                       merayakan hari istimewa kami. Hadirnya kamu menjadi bagian
                       dari kenangan terindah dalam hidup kami.
                     </p>
                   </div>
-                  <div className="rounded-3xl border border-white bg-white/70 p-6 shadow-card bg-card">
-                    <p className="text-2xl text-center font-semibold text-ink-900">
+                  <div className="rounded-3xl border-2 border-white bg-white/70 p-6 shadow-card bg-card">
+                    <p className="text-4xl text-center font-niconne text-ink-900">
                       {EVENT_DETAILS.ceremony.dateLabel}
                     </p>
                     <CountdownTicker countdown={countdown} />
@@ -393,10 +348,10 @@ export default function InvitationExperience({
             <section data-scroll-section>
               <div className="flex flex-col gap-6">
                 <div>
-                  <p className="text-base font-playwrite text-sand-700">
+                  <p className="text-base font-cormorant text-sand-700">
                     Detail Acara
                   </p>
-                  <h2 className="mt-3 font-display text-3xl text-ink-900">
+                  <h2 className="mt-3 font-display text-3xl text-sand-500">
                     Dua momen berharga dalam satu hari bahagia
                   </h2>
                 </div>
@@ -404,27 +359,27 @@ export default function InvitationExperience({
                   {Object.values(EVENT_DETAILS).map((event) => (
                     <div
                       key={event.title}
-                      className="relative flex h-full flex-col justify-center rounded-[2rem] border border-sand-400 bg-card p-10 text-center shadow-card"
+                      className="relative flex h-full flex-col justify-center rounded-[2rem] border-2 border-white bg-card-detail p-10 text-center shadow-card"
                     >
                       {/* Bunga Sudut Kiri Atas */}
-                      <div className="absolute -left-1 -top-3 h-32 w-32 pointer-events-none z-0 md:h-44 md:w-44">
+                      {/* <div className="absolute -left-1 -top-3 h-32 w-32 pointer-events-none z-0 md:h-44 md:w-44">
                         <Image
                           src="/other/flower-corner.png"
                           alt="Flower Ornament Left"
                           fill
                           className="object-contain object-left-top"
                         />
-                      </div>
+                      </div> */}
 
                       {/* Bunga Sudut Kanan Bawah */}
-                      <div className="absolute -bottom-3 -right-1 h-32 w-32 rotate-180 pointer-events-none z-0 md:h-44 md:w-44">
+                      {/* <div className="absolute -bottom-3 -right-1 h-32 w-32 rotate-180 pointer-events-none z-0 md:h-44 md:w-44">
                         <Image
                           src="/other/flower-corner.png"
                           alt="Flower Ornament Right"
                           fill
                           className="object-contain object-left-top"
                         />
-                      </div>
+                      </div> */}
 
                       <div className="relative z-10">
                         <p className="text-xs font-semibold uppercase tracking-[0.3em] text-sand-700">
@@ -466,19 +421,19 @@ export default function InvitationExperience({
             <section data-scroll-section>
               <div className="flex flex-col gap-6">
                 <div>
-                  <p className="text-base font-playwrite text-sand-700">
+                  <p className="text-base font-cormorant text-sand-700">
                     Gallery
                   </p>
-                  <h2 className="mt-3 font-display text-3xl text-ink-900">
+                  <h2 className="mt-3 font-display text-3xl text-sand-500">
                     Momen-momen yang memeluk kisah kami
                   </h2>
-                  <p className="mt-4 text-base leading-relaxed text-ink-500">
-                    "Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia
+                  <p className="mt-4 text-base leading-relaxed text-white">
+                    &quot;Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia
                     menciptakan pasangan-pasangan untukmu dari jenismu sendiri,
                     agar kamu cenderung dan merasa tenteram kepadanya, dan Dia
                     menjadikan di antaramu rasa kasih dan sayang. Sungguh, pada
                     yang demikian itu benar-benar terdapat tanda-tanda
-                    (kebesaran Allah) bagi kaum yang berpikir. ~ Ar Ruum;21"
+                    (kebesaran Allah) bagi kaum yang berpikir. ~ Ar Ruum;21&quot;
                   </p>
                 </div>
                 <GalleryGrid onOpen={openLightbox} />
@@ -495,20 +450,20 @@ export default function InvitationExperience({
             </section>
 
             <section className="pb-20" data-scroll-section>
-              <div className="rounded-3xl border border-sand-200 bg-white/80 p-8 text-center shadow-card bg-card">
-                <p className="text-base font-playwrite text-sand-700">
+              <div className="rounded-3xl border-2 border-white bg-white/80 p-8 text-center shadow-card bg-card">
+                <p className="text-2xl font-cormorant text-sand-700">
                   Terima Kasih
                 </p>
                 <h2 className="mt-4 font-display text-3xl text-ink-900">
                   Kehadiranmu adalah doa terindah
                 </h2>
                 <p className="mt-4 text-xs sm:text-base leading-relaxed text-ink-500">
-                  "Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila
-                  Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan do'a restu
-                  kepada kedua mempelai.
+                  &quot;Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila
+                  Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan do&apos;a restu
+                  kepada kedua mempelai.&quot;
                 </p>
-                <p className="mt-5 font-playwrite text-sm md:text-3xl text-sand-700">
-                  Wassalamu'alaikum Warahmatullahi Wabarakatuh.
+                <p className="mt-5 font-niconne text-xl md:text-3xl text-sand-700">
+                  Wassalamu&apos;alaikum Warahmatullahi Wabarakatuh.
                 </p>
               </div>
             </section>

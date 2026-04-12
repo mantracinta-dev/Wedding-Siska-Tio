@@ -23,7 +23,7 @@ function GalleryGridComponent({
           key={photo.id}
           type="button"
           onClick={() => onOpen(index)}
-          className="group relative overflow-hidden rounded-3xl border border-sand-200 bg-sand-50"
+          className="group relative overflow-hidden rounded-3xl border-2 border-white bg-white/70"
         >
           <div
             className="relative w-full"

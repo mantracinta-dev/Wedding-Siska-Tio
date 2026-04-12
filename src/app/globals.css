@@ -14,7 +14,10 @@
 
   --font-display: var(--font-display), serif;
   --font-body: var(--font-body), sans-serif;
-  --font-playwrite: var(--font-playwrite), cursive;
+  --font-serif-display: var(--font-display), serif;
+  --font-name-style: var(--font-name-style), cursive;
+  --font-cormorant: var(--font-cormorant), serif;
+  --font-niconne: var(--font-niconne), cursive;
 
   --shadow-card: 0 20px 60px rgba(16, 10, 7, 0.15);
 
@@ -91,12 +94,25 @@
 
 .bg-pattern {
   background-color: #e8e8e8;
-  background-image: url(../../public/other/pattern-xv.webp);
+  /* background-image: url(../../public/other/pattern-xv.webp); */
+  background-image: url(../../public/other/bg-green.jpg);
+  /* background-size: cover; */
+  background-attachment: fixed;
+  background-size: 100%;
 }
 
 .bg-card {
   background-image:
-    radial-gradient(white, transparent), url(../../public/other/bg-regal.webp);
+    radial-gradient(white, transparent), url(../../public/other/bg-card.jpg);
   background-repeat: repeat;
-  background-position: center;
+  background-position: bottom;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.bg-card-detail {
+  background-image: url(../../public/other/bg-card-green.jpg);
+  background-repeat: no-repeat;
+  background-position: top;
+  background-size: 100%;
 }

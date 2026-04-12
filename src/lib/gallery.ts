@@ -12,7 +12,7 @@ export const GALLERY_PHOTOS: GalleryPhoto[] = [
     title: "The Silent Promise.",
     subcaption:
       "Keindahan yang dimulai dari sebuah tatapan sederhana namun penuh makna.",
-    src: "/gallery/image1.webp",
+    src: "/gallery/image1-opt.jpg",
     orientation: "portrait",
   },
   {
@@ -20,7 +20,7 @@ export const GALLERY_PHOTOS: GalleryPhoto[] = [
     title: "The Beginning",
     subcaption:
       "Mengenakan adat, menjaga martabat, menyatukan dua hati dalam balutan doa.",
-    src: "/gallery/image2.webp",
+    src: "/gallery/image2-opt.jpg",
     orientation: "portrait",
   },
   {
@@ -28,7 +28,7 @@ export const GALLERY_PHOTOS: GalleryPhoto[] = [
     title: "Quietly Devoted.",
     subcaption:
       "Duduk berdampingan, bersiap melangkah menuju babak baru yang lebih tenang.",
-    src: "/gallery/img3.webp",
+    src: "/gallery/image3-opt.jpg",
     orientation: "portrait",
   },
   {
@@ -36,7 +36,7 @@ export const GALLERY_PHOTOS: GalleryPhoto[] = [
     title: "A Hand to Hold.",
     subcaption:
       "Genggaman tangan ini adalah janji bahwa tidak akan ada lagi perjalanan yang dilalui sendirian.",
-    src: "/gallery/img4.webp",
+    src: "/gallery/image4-opt.jpg",
     orientation: "portrait",
   },
   {
@@ -44,7 +44,7 @@ export const GALLERY_PHOTOS: GalleryPhoto[] = [
     title: "Shining Together.",
     subcaption:
       "Di antara tawa dan putihnya janji, kita menemukan masa depan yang paling cerah.",
-    src: "/gallery/img5.webp",
+    src: "/gallery/image5-opt.jpg",
     orientation: "portrait",
   },
   {
@@ -52,7 +52,7 @@ export const GALLERY_PHOTOS: GalleryPhoto[] = [
     title: "Written in the Stars.",
     subcaption:
       "Bukan lagi tentang aku atau kamu, tapi tentang 'kita' yang akan terus bersama selamanya.",
-    src: "/gallery/img6.webp",
+    src: "/gallery/image6-opt.jpg",
     orientation: "portrait",
   },
 ];

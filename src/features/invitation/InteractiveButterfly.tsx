@@ -32,8 +32,6 @@ export default function InteractiveButterfly({
     if (!isOpened || !containerRef.current) return;
 
     // Panik & Kepak Sayap Lebih Cepat
-    setSpeed(2.5);
-
     // Bikin variasi arah terbang (ke kiri atas atau kanan atas)
     const isLeftButterfly = baseRotate > 0; // Sudut positif ada di kiri
 
@@ -44,6 +42,10 @@ export default function InteractiveButterfly({
 
     const tl = gsap.timeline({
       delay: delay, // Variasi waktu berangkat antara kupu-kupu kiri dan kanan
+      onStart: () => {
+        // Naikkan kecepatan animasi kupu-kupu saat mulai terbang
+        setSpeed(2.5);
+      },
       onComplete: () => {
         // Hapus elemen selamanya jika animasinya sudah kelar
         if (containerRef.current) {

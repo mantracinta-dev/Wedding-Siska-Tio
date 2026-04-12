@@ -173,9 +173,9 @@ export default function Guestbook({ guestSlug, guestName }: GuestbookProps) {
   const isGenericGuest = guestSlug === "tamu" || guestSlug === "tamu-spesial";
 
   return (
-    <div className="w-full rounded-3xl bg-white/70 py-6 overflow-hidden shadow-card backdrop-blur">
+    <div className="w-full rounded-3xl bg-white/70 border-2 border-white py-6 overflow-hidden shadow-card backdrop-blur">
       <div className="flex flex-col gap-2 px-6">
-        <p className="text-base font-playwrite text-sand-700">Guestbook</p>
+        <p className="text-base font-cormorant text-sand-700">Guestbook</p>
         <h3 className="text-2xl font-semibold text-ink-900">
           {isGenericGuest
             ? "Ucapan & Doa Restu"
@@ -193,7 +193,7 @@ export default function Guestbook({ guestSlug, guestName }: GuestbookProps) {
           {entry && !isEditing ? (
             <div
               ref={successRef}
-              className="mt-6 mx-6 rounded-2xl border border-sand-200 bg-sand-50 p-5 shadow-sm"
+              className="mt-6 mx-6 rounded-2xl border-2 border-white bg-sand-50 p-5 shadow-sm"
             >
               <div className="flex items-start justify-between gap-4">
                 <div>
@@ -280,7 +280,7 @@ export default function Guestbook({ guestSlug, guestName }: GuestbookProps) {
       )}
 
       <div className="mt-12 w-full overflow-hidden">
-        <p className="mb-6 px-6 text-base font-playwrite text-sand-700">
+        <p className="mb-6 px-6 text-base font-cormorant text-sand-700">
           Ucapan Tamu Lain
         </p>
 
@@ -330,7 +330,7 @@ export default function Guestbook({ guestSlug, guestName }: GuestbookProps) {
                         {item.name}
                       </p>
                       <p className="mt-3 text-base leading-relaxed text-ink-500 line-clamp-5">
-                        "{item.message}"
+                        {`"${item.message}"`}
                       </p>
                       {item.updatedAt && (
                         <p className="mt-4 text-[10px] font-semibold uppercase tracking-[0.2em] text-sand-500">
@@ -355,7 +355,7 @@ export default function Guestbook({ guestSlug, guestName }: GuestbookProps) {
                         {item.name}
                       </p>
                       <p className="mt-3 text-base leading-relaxed text-ink-500 line-clamp-5">
-                        "{item.message}"
+                        {`"${item.message}"`}
                       </p>
                       {item.updatedAt && (
                         <p className="mt-4 text-[10px] font-semibold uppercase tracking-[0.2em] text-sand-500">
@@ -404,7 +404,7 @@ export default function Guestbook({ guestSlug, guestName }: GuestbookProps) {
                           {item.name}
                         </p>
                         <p className="mt-3 text-base leading-relaxed text-ink-500">
-                          "{item.message}"
+                          {`"${item.message}"`}
                         </p>
                         {item.updatedAt && (
                           <p className="mt-4 text-[10px] font-semibold uppercase tracking-[0.2em] text-sand-500">
