@@ -252,7 +252,7 @@ export default function InvitationExperience({
               <div className="mt-6 grid gap-4 md:grid-cols-2">
                 <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border-2 border-white shadow-inner">
                   <Image
-                    src="/other/together.jpg"
+                    src="/other/together-opt.jpg"
                     alt="wedding"
                     fill
                     className="object-cover object-center"
@@ -433,7 +433,8 @@ export default function InvitationExperience({
                     agar kamu cenderung dan merasa tenteram kepadanya, dan Dia
                     menjadikan di antaramu rasa kasih dan sayang. Sungguh, pada
                     yang demikian itu benar-benar terdapat tanda-tanda
-                    (kebesaran Allah) bagi kaum yang berpikir. ~ Ar Ruum;21&quot;
+                    (kebesaran Allah) bagi kaum yang berpikir. ~ Ar
+                    Ruum;21&quot;
                   </p>
                 </div>
                 <GalleryGrid onOpen={openLightbox} />
@@ -458,9 +459,9 @@ export default function InvitationExperience({
                   Kehadiranmu adalah doa terindah
                 </h2>
                 <p className="mt-4 text-xs sm:text-base leading-relaxed text-ink-500">
-                  &quot;Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila
-                  Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan do&apos;a restu
-                  kepada kedua mempelai.&quot;
+                  &quot;Merupakan suatu kehormatan dan kebahagiaan bagi kami
+                  apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan
+                  do&apos;a restu kepada kedua mempelai.&quot;
                 </p>
                 <p className="mt-5 font-niconne text-xl md:text-3xl text-sand-700">
                   Wassalamu&apos;alaikum Warahmatullahi Wabarakatuh.
