@@ -96,9 +96,9 @@
   background-color: #e8e8e8;
   /* background-image: url(../../public/other/pattern-xv.webp); */
   background-image: url(../../public/other/bg-green.jpg);
-  /* background-size: cover; */
   background-attachment: fixed;
-  background-size: 100%;
+  background-size: cover;
+  background-position: center;
 }
 
 .bg-card {
