@@ -474,37 +474,68 @@ export default function InvitationExperience({
 
       {activePhoto && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-ink-900/80 px-4 py-10"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-ink-900/80 backdrop-blur-md px-4 py-10"
+          style={{ animation: "fadeIn 0.4s ease-out forwards" }}
           onClick={(event) => {
             if (event.target === event.currentTarget) {
               closeLightbox();
             }
           }}
         >
-          <div className="relative w-full max-w-3xl overflow-hidden rounded-3xl bg-white shadow-2xl">
+          <style>{`
+            @keyframes fadeIn {
+              from { opacity: 0; }
+              to { opacity: 1; }
+            }
+            @keyframes zoomIn {
+              from { opacity: 0; transform: scale(0.95); }
+              to { opacity: 1; transform: scale(1); }
+            }
+            @keyframes breathingPan {
+              0% { transform: scale(1) translate(0, 0); }
+              50% { transform: scale(1.06) translate(1.5%, -1.5%); }
+              100% { transform: scale(1.03) translate(-1%, 1%); }
+            }
+          `}</style>
+          <div
+            className={`relative w-full overflow-hidden rounded-3xl bg-white shadow-2xl group ${
+              activePhoto.orientation === "portrait"
+                ? "max-w-[85vw] sm:max-w-md lg:max-w-lg"
+                : "max-w-[95vw] md:max-w-4xl lg:max-w-5xl"
+            }`}
+            style={{ animation: "zoomIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards" }}
+          >
             <button
               type="button"
               onClick={closeLightbox}
-              className="absolute right-4 top-4 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/80 text-ink-900 shadow"
+              className="absolute right-4 top-4 z-20 inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/80 text-ink-900 shadow transition hover:bg-white hover:scale-110"
               aria-label="Tutup foto"
             >
               <X className="h-5 w-5" />
             </button>
-            <div className="relative w-full" style={{ aspectRatio: "4 / 3" }}>
+
+            <div
+              className="relative w-full"
+              style={{
+                aspectRatio:
+                  activePhoto.orientation === "portrait" ? "3 / 4" : "4 / 3",
+              }}
+            >
               <Image
                 src={activePhoto.src}
                 alt={activePhoto.title}
                 fill
                 className="object-cover"
-                sizes="(min-width: 768px) 60vw, 90vw"
+                style={{ animation: "breathingPan 25s ease-in-out infinite alternate" }}
+                sizes="(min-width: 1024px) 80vw, (min-width: 768px) 90vw, 100vw"
                 priority
               />
             </div>
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6 text-white">
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-white/80">
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6 text-white md:p-8">
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-white/80 md:text-base">
                 {activePhoto.subcaption}
               </p>
-              <p className="text-2xl font-semibold">{activePhoto.title}</p>
+              <p className="text-2xl font-semibold md:text-4xl">{activePhoto.title}</p>
             </div>
           </div>
         </div>
