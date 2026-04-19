@@ -14,7 +14,7 @@ export function useInvitationViewModel(guest: GuestProfile) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const [activePhotoIndex, setActivePhotoIndex] = useState<number | null>(null);
-  const [isOpened, setIsOpened] = useState(false);
+  const [isOpened, setIsOpened] = useState(guest.skipCover ?? false);
   const [hasInteracted, setHasInteracted] = useState(false);
   const [isAudioActive, setIsAudioActive] = useState(false);
   const [isMusicMuted, setIsMusicMuted] = useState(true);

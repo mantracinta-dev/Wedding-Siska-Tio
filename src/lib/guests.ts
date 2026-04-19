@@ -2,6 +2,7 @@ export type GuestProfile = {
   slug: string;
   name: string;
   relationship?: string;
+  skipCover?: boolean;
 };
 
 const GUESTS: Record<string, GuestProfile> = {
@@ -41,11 +42,13 @@ export function resolveGuest(slugInput: string): GuestProfile {
     return {
       slug: normalized || "tamu-spesial",
       name: fallbackName(normalized),
+      skipCover: normalized === "tamu",
     };
   } catch {
     return {
       slug: slugInput,
       name: fallbackName(slugInput),
+      skipCover: slugInput.toLowerCase() === "tamu",
     };
   }
 }
